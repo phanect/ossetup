@@ -23,6 +23,10 @@ wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key a
 sudo add-apt-repository "deb http://linux.dropbox.com/ubuntu $(lsb_release --short --codename) main"
 sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
 
+# Add Docker Repo
+sudo add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-$(lsb_release --short --codename) main"
+apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+
 # Add Ansible Repo
 sudo apt-add-repository ppa:ansible/ansible
 
@@ -31,7 +35,7 @@ sudo apt-get install -y curl flashplugin-installer kolourpaint4 muon vlc whois y
 dropbox python-gpgme \
 fcitx fcitx-mozc kde-config-fcitx \
 colordiff git kdesdk-dolphin-plugins virtualbox-5.0 \
-ansible python-libcloud
+docker-engine ansible python-libcloud
 
 # Brackets
 if [[ "$(lsb_release --short --codename)" == "vivid" ]]; then
