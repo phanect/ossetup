@@ -1,0 +1,10 @@
+language: bash
+sudo: required
+services:
+  - docker
+
+before_script:
+  - docker build --tag=phanect/kubuntu .
+
+script:
+  - docker run --detach phanect/kubuntu /bin/bash -c "curl https://raw.githubusercontent.com/phanect/ossetup/master/setup.sh | bash"
