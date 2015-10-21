@@ -79,6 +79,13 @@ _EOF_
 fi
 
 #
+# git config
+#
+
+# Don't commit file permission change
+git config core.fileMode false
+
+#
 # Aliases
 #
 if ! grep --fixed-strings --line-regexp "# colordiff" ~/.bashrc; then
