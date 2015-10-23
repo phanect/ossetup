@@ -39,9 +39,9 @@ docker-engine ansible python-libcloud
 
 # Brackets
 if [[ "$(lsb_release --short --codename)" == "vivid" ]]; then
-# TODO Link no longer work, replace it to one provided in Ubuntu 14.04 LTS official repo
-wget -O libgcrypt11.deb http://ftp.acc.umu.se/mirror/cdimage/snapshot/Debian/pool/main/libg/libgcrypt11/libgcrypt11_1.5.4-3_amd64.deb
-sudo dpkg --install ./libgcrypt11.deb
+  # TODO Link no longer work, replace it to one provided in Ubuntu 14.04 LTS official repo
+  wget -O libgcrypt11.deb http://mirrors.kernel.org/ubuntu/pool/main/libg/libgcrypt11/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb
+  sudo dpkg --install ./libgcrypt11.deb
 fi
 
 wget -O brackets.deb https://github.com/adobe/brackets/releases/download/release-1.4/Brackets.Release.1.4.64-bit.deb
