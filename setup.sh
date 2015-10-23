@@ -53,8 +53,13 @@ sudo apt-get install --fix-broken
 #
 # Node.js Environment Setup
 #
+
+# Get latest version of NVM
+git clone git@github.com:creationix/nvm.git && cd nvm
+NVM_LATEST=$(git describe --abbrev=0)
+
 touch ~/.bashrc
-curl https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh | bash
+curl https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh | bash
 source ~/.profile
 nvm install stable
 nvm use stable
