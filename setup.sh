@@ -33,7 +33,7 @@ apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070AD
 sudo apt-add-repository ppa:ansible/ansible
 
 sudo apt-get update
-sudo apt-get install -y curl flashplugin-installer kolourpaint4 muon vlc whois yakuake \
+sudo apt-get install -y curl flashplugin-installer fonts-vlgothic kolourpaint4 muon vlc whois yakuake \
 dropbox python-gpgme \
 fcitx fcitx-mozc kde-config-fcitx \
 colordiff git kdesdk-dolphin-plugins virtualbox-5.0 \
@@ -49,12 +49,6 @@ fi
 wget -O brackets.deb https://github.com/adobe/brackets/releases/download/release-1.5/Brackets.Release.1.5.64-bit.deb
 sudo dpkg --install ./brackets.deb
 sudo apt-get install --fix-broken
-
-curl -o vlgothic.zip --location --remote-name "http://osdn.jp/frs/redir.php?m=iij&f=%2Fvlgothic%2F62375%2FVLGothic-20141206.zip"
-unzip vlgothic.zip
-
-mv ./VLGothic/VL-PGothic-Regular.ttf ~/Desktop
-mv ./VLGothic/VL-Gothic-Regular.ttf ~/Desktop
 
 #
 # Node.js Environment Setup
