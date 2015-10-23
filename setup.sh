@@ -2,6 +2,8 @@
 
 set -eu
 
+rm -rf /tmp/setup-phanective
+
 mkdir /tmp/setup-phanective
 cd /tmp/setup-phanective
 
