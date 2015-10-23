@@ -46,7 +46,7 @@ if [[ "$(lsb_release --short --codename)" == "vivid" ]]; then
   sudo dpkg --install ./libgcrypt11.deb
 fi
 
-wget -O brackets.deb https://github.com/adobe/brackets/releases/download/release-1.4/Brackets.Release.1.4.64-bit.deb
+wget -O brackets.deb https://github.com/adobe/brackets/releases/download/release-1.5/Brackets.Release.1.5.64-bit.deb
 sudo dpkg --install ./brackets.deb
 sudo apt-get install --fix-broken
 
