@@ -5,7 +5,7 @@ services:
 
 before_install:
   - docker build --tag=phanect/ossetup .
-  - docker run phanect/ossetup /bin/bash
+
 
 script:
-  - curl https://raw.githubusercontent.com/phanect/ossetup/master/setup.sh | bash
+  - docker run phanect/ossetup "curl https://raw.githubusercontent.com/phanect/ossetup/master/setup.sh | bash"
