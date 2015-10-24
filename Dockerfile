@@ -1,4 +1,3 @@
-FROM ubuntu:15.04
+FROM phanect/kubuntu
 
-RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install kubuntu-desktop curl -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get install curl -y

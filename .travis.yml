@@ -4,8 +4,8 @@ services:
   - docker
 
 before_script:
-  - docker build --tag=phanect/kubuntu .
-  - docker run phanect/kubuntu /bin/bash
+  - docker build --tag=phanect/ossetup .
+  - docker run phanect/ossetup /bin/bash
 
 script:
   - curl https://raw.githubusercontent.com/phanect/ossetup/master/setup.sh | bash
