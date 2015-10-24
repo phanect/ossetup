@@ -5,6 +5,7 @@ services:
 
 before_script:
   - docker build --tag=phanect/kubuntu .
+  - docker run phanect/kubuntu /bin/bash
 
 script:
-  - docker run --detach phanect/kubuntu /bin/bash -c "curl https://raw.githubusercontent.com/phanect/ossetup/master/setup.sh | bash"
+  - curl https://raw.githubusercontent.com/phanect/ossetup/master/setup.sh | bash
