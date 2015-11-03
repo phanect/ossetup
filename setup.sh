@@ -33,7 +33,7 @@ apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070AD
 sudo apt-add-repository ppa:ansible/ansible
 
 sudo apt-get update
-sudo apt-get install -y curl flashplugin-installer fonts-vlgothic kolourpaint4 muon vlc whois yakuake \
+sudo apt-get install -y curl flashplugin-installer fonts-vlgothic jq kolourpaint4 muon vlc whois yakuake \
 dropbox python-gpgme \
 fcitx fcitx-mozc kde-config-fcitx \
 colordiff git kdesdk-dolphin-plugins virtualbox-5.0 \
@@ -55,8 +55,7 @@ sudo apt-get install --fix-broken
 #
 
 # Get latest version of NVM
-git clone git@github.com:creationix/nvm.git && cd nvm
-NVM_LATEST=$(git describe --abbrev=0)
+NVM_LATEST=$(curl https://api.github.com/repos/creationix/nvm/releases/latest | jq .name)
 
 touch ~/.bashrc
 curl https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh | bash
