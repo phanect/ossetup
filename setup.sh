@@ -68,6 +68,9 @@ npm install -g bower eslint geddy gulp
 # Python Environment Setup
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
+# Python build dependencies
+sudo apt-get install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev
+
 if ! grep --fixed-strings --line-regexp "# PyEnv" ~/.bashrc; then
 cat << _EOF_ >> ~/.bashrc
 
