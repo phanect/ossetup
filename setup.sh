@@ -2,6 +2,8 @@
 
 set -eu
 
+CODENAME="$(lsb_release --short --codename)"
+
 rm -rf /tmp/setup-phanective
 
 mkdir /tmp/setup-phanective
@@ -18,15 +20,15 @@ sudo apt-get autoremove -y
 sudo apt-get dist-upgrade -y
 
 # Add VirtualBox Repo
-sudo add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release --short --codename) contrib"
+sudo add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib"
 wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
 
 # Add Dropbox Repo
-sudo add-apt-repository "deb http://linux.dropbox.com/ubuntu $(lsb_release --short --codename) main"
+sudo add-apt-repository "deb http://linux.dropbox.com/ubuntu $CODENAME main"
 sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
 
 # Add Docker Repo
-sudo add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-$(lsb_release --short --codename) main"
+sudo add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-$CODENAME main"
 apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
 # Add Ansible Repo
@@ -40,7 +42,7 @@ colordiff git kdesdk-dolphin-plugins virtualbox-5.0 \
 docker-engine ansible python-libcloud
 
 # Brackets
-if [[ "$(lsb_release --short --codename)" == "vivid" ]]; then
+if [[ "$CODENAME" == "vivid" ]]; then
   # TODO Link no longer work, replace it to one provided in Ubuntu 14.04 LTS official repo
   wget -O libgcrypt11.deb http://mirrors.kernel.org/ubuntu/pool/main/libg/libgcrypt11/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb
   sudo dpkg --install ./libgcrypt11.deb
