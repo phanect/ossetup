@@ -88,7 +88,7 @@ fi
 #
 
 # Don't commit file permission change
-git config core.fileMode false
+git config --global core.fileMode false
 
 #
 # Aliases
