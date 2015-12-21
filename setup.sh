@@ -19,6 +19,11 @@ sudo apt-get update
 sudo apt-get autoremove -y
 sudo apt-get dist-upgrade -y
 
+# Add universe and multiverse
+sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME universe multiverse"
+sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-updates universe multiverse"
+sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-security universe multiverse"
+
 # Add VirtualBox Repo
 sudo add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib"
 wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
