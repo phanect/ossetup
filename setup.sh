@@ -25,7 +25,7 @@ wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key a
 
 # Add Dropbox Repo
 sudo add-apt-repository "deb http://linux.dropbox.com/ubuntu $CODENAME main"
-sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
+apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
 
 # Add Docker Repo
 sudo add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-$CODENAME main"
