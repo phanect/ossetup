@@ -29,7 +29,7 @@ sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
 
 # Add Docker Repo
 sudo add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-$CODENAME main"
-apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
 # Add Ansible Repo
 sudo apt-add-repository ppa:ansible/ansible
