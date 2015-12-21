@@ -62,7 +62,7 @@ sudo apt-get install --fix-broken
 #
 
 # Get latest version of NVM
-NVM_LATEST=$(curl https://api.github.com/repos/creationix/nvm/releases/latest | jq .name)
+NVM_LATEST=$(curl https://api.github.com/repos/creationix/nvm/releases/latest | jq --raw-output .name)
 
 touch ~/.bashrc
 curl https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh | bash
