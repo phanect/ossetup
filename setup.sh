@@ -43,7 +43,7 @@ sudo apt-get update
 sudo apt-get install -y curl flashplugin-installer fonts-vlgothic jq kolourpaint4 muon vlc whois yakuake \
 dropbox python-gpgme \
 fcitx fcitx-mozc kde-config-fcitx \
-colordiff g++ git kdesdk-dolphin-plugins virtualbox-5.0 \
+colordiff default-jre-headless g++ git kdesdk-dolphin-plugins virtualbox-5.0 \
 docker-engine ansible python-libcloud
 
 # Brackets
