@@ -3,15 +3,5 @@ sudo: required
 services:
   - docker
 
-env:
-  - VERSION=14.04
-  - VERSION=15.10
-
-before_install:
-  - curl --output /tmp/packer.zip https://releases.hashicorp.com/packer/0.8.6/packer_0.8.6_linux_amd64.zip
-  - unzip /tmp/packer.zip -d /tmp/packer/
-  - /tmp/packer/packer validate -var "kubuntu_version=$VERSION" packer.json
-  - /tmp/packer/packer build -var "kubuntu_version=$VERSION" packer.json
-
 script:
-  - docker run phanect/ossetup /bin/bash -c "cat /tmp/setup.sh | bash"
+  - docker run phanect/test-ossetup /bin/bash -c "cat /tmp/setup.sh | bash"
