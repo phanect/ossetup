@@ -65,7 +65,7 @@ sudo apt-get install --fix-broken
 NVM_LATEST=$(curl https://api.github.com/repos/creationix/nvm/releases/latest | jq --raw-output .name)
 
 touch ~/.bashrc
-curl https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh | bash
+curl "https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh" | bash
 source ~/.profile
 nvm install stable
 nvm use stable
@@ -102,7 +102,7 @@ if ! grep --fixed-strings --line-regexp "# colordiff" ~/.bashrc; then
 cat << _EOF_ >> ~/.bashrc
 
 # colordiff
-if [[ -x `which colordiff` ]]; then
+if [[ -x "$(which colordiff)" ]]; then
 alias diff="colordiff -u"
 export LESS='--RAW-CONTROL-CHARS'
 fi
