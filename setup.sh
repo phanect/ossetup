@@ -88,6 +88,11 @@ eval "\$(pyenv virtualenv-init -)"
 _EOF_
 fi
 
+PYTON_LATEST="$(pyenv install --list | tr --delete " " | grep --extended-regexp ^[0-9\.]+$ | tac | grep --max-count=1 .)"
+pyenv install "$PYTON_LATEST"
+pyenv global "$PYTON_LATEST"
+pip install ansible
+
 #
 # git config
 #
