@@ -6,6 +6,7 @@ sudo apt-get update
 sudo apt-get install --yes apt-transport-https curl jq lsb-release software-properties-common sudo wget
 
 PATH_PACKAGES_JSON="$(dirname "$BASH_SOURCE")/packages.json"
+PATH_TMP_REPO_LIST=/etc/apt/sources.list.d/tmp.list
 
 DISTRO="$(lsb_release --short --id)"
 DISTRO="${DISTRO,,}" # Make lowercase: e.g. Debian -> debian, Ubuntu -> ubuntu
@@ -43,15 +44,15 @@ elif [ "$DISTRO" = "debian" ]; then
 fi
 
 # Add VirtualBox Repo
-sudo add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib"
+echo "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
 
-# Add Dropbox Repo
-sudo add-apt-repository "deb http://linux.dropbox.com/ubuntu $CODENAME main"
+# Add Dropbox Repo; the package includes dropbox.list
+echo "deb http://linux.dropbox.com/ubuntu $CODENAME main" | sudo tee "$PATH_TMP_REPO_LIST"
 apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
 
 # Add Docker Repo
-sudo add-apt-repository "deb https://apt.dockerproject.org/repo ubuntu-$CODENAME main"
+echo "deb https://apt.dockerproject.org/repo $DISTRO-$CODENAME main" | sudo tee /etc/apt/sources.list.d/docker.list
 apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
 # Add Ansible Repo
@@ -74,6 +75,8 @@ fi
 wget -O brackets.deb https://github.com/adobe/brackets/releases/download/release-1.5/Brackets.Release.1.5.64-bit.deb
 sudo dpkg --install ./brackets.deb
 sudo apt-get install --fix-broken
+
+sudo rm -f "$PATH_TMP_REPO_LIST"
 
 #
 # Node.js Environment Setup
