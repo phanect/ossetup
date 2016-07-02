@@ -2,6 +2,9 @@
 
 set -eu
 
+sudo apt-get update
+sudo apt-get install --yes apt-transport-https curl jq lsb-release software-properties-common sudo wget
+
 CODENAME="$(lsb_release --short --codename)"
 
 rm -rf /tmp/setup-phanective
@@ -15,7 +18,6 @@ kde-telepathy-text-ui kmail kontact konversation korganizer krdc ktorrent \
 fonts-droid fonts-horai-umefont fonts-takao-pgothic \
 openjdk-7-jre openjdk-7-jre-headless partitionmanager
 
-sudo apt-get update
 sudo apt-get autoremove -y
 sudo apt-get dist-upgrade -y
 
