@@ -6,7 +6,6 @@ sudo apt-get update
 sudo apt-get install --yes apt-transport-https curl jq lsb-release software-properties-common sudo wget
 
 PATH_PACKAGES_JSON="$(dirname "$BASH_SOURCE")/packages.json"
-PATH_TMP_REPO_LIST=/etc/apt/sources.list.d/tmp.list
 
 DISTRO="$(lsb_release --short --id)"
 DISTRO="${DISTRO,,}" # Make lowercase: e.g. Debian -> debian, Ubuntu -> ubuntu
@@ -54,18 +53,22 @@ fi
 echo "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
 
-# Add Dropbox Repo; the package includes dropbox.list
-echo "deb http://linux.dropbox.com/ubuntu $CODENAME main" | sudo tee "$PATH_TMP_REPO_LIST"
-apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
-
 # Add Docker Repo
 echo "deb https://apt.dockerproject.org/repo $DISTRO-$CODENAME main" | sudo tee /etc/apt/sources.list.d/docker.list
 apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
 sudo apt-get update
-sudo apt-get install --yes $PKGS_INSTALL
 
-sudo rm -f "$PATH_TMP_REPO_LIST"
+# Install Dropbox
+curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$DISTRO/dropbox_2015.10.28_amd64.deb"
+set +eu; sudo dpkg --install /tmp/setup-phanective/dropbox.deb; set -eu # Occurs error that dependencies are not installed
+
+sudo apt-get --fix-broken install --yes $PKGS_INSTALL
+
+# Dropbox proprietary daemon installation
+(cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -)
+dropbox autostart y
+dropbox start --install
 
 #
 # Node.js Environment Setup
@@ -134,6 +137,3 @@ fi
 rm -rf /tmp/setup-phanective
 
 source ~/.bashrc
-
-dropbox autostart y
-dropbox start -i
