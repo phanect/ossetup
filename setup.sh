@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -eu
+set -eux
 
 sudo apt-get update
 sudo apt-get install --yes apt-transport-https curl jq lsb-release software-properties-common sudo wget
