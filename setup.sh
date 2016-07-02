@@ -63,7 +63,7 @@ sudo apt-get update
 curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$DISTRO/dropbox_2015.10.28_amd64.deb"
 set +eu; sudo dpkg --install /tmp/setup-phanective/dropbox.deb; set -eu # Occurs error that dependencies are not installed
 
-sudo apt-get --fix-broken install --yes $PKGS_INSTALL
+sudo apt-get --fix-broken install --yes --no-install-recommends $PKGS_INSTALL
 
 # Dropbox proprietary daemon installation
 (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -)
