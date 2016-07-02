@@ -12,6 +12,9 @@ DISTRO="$(lsb_release --short --id)"
 DISTRO="${DISTRO,,}" # Make lowercase: e.g. Debian -> debian, Ubuntu -> ubuntu
 CODENAME="$(lsb_release --short --codename)"
 
+PKGS_INSTALL="$(jq --raw-output '.install.all | join(" ")' < "$PATH_PACKAGES_JSON")"
+PKGS_INSTALL="$PKGS_INSTALL $(jq --raw-output ".install.$DISTRO.all | join(\" \")" < "$PATH_PACKAGES_JSON")"
+PKGS_INSTALL="$PKGS_INSTALL $(jq --raw-output ".install.$DISTRO.$CODENAME | join(\" \")" < "$PATH_PACKAGES_JSON")"
 PKGS_REMOVE="$(jq --raw-output '.remove.all | join(" ")' < "$PATH_PACKAGES_JSON")"
 PKGS_REMOVE="$PKGS_REMOVE $(jq --raw-output ".remove.$DISTRO.all | join(\" \")" < "$PATH_PACKAGES_JSON")"
 PKGS_REMOVE="$PKGS_REMOVE $(jq --raw-output ".remove.$DISTRO.$CODENAME | join(\" \")" < "$PATH_PACKAGES_JSON")"
@@ -59,11 +62,7 @@ echo "deb https://apt.dockerproject.org/repo $DISTRO-$CODENAME main" | sudo tee 
 apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
 sudo apt-get update
-sudo apt-get install -y curl flashplugin-installer fonts-vlgothic jq kolourpaint4 muon vlc whois yakuake \
-dropbox python-gpgme \
-fcitx fcitx-mozc kde-config-fcitx \
-colordiff default-jre-headless g++ git kdesdk-dolphin-plugins virtualbox-5.0 \
-docker-engine ansible python-libcloud
+sudo apt-get install --yes $PKGS_INSTALL
 
 # Brackets
 if [[ "$CODENAME" == "vivid" ]]; then

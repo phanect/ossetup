@@ -1,4 +1,44 @@
 {
+  "install": {
+    "all": [
+      "curl",
+      "colordiff",
+      "fonts-vlgothic",
+      "jq",
+      "kolourpaint4",
+      "vlc",
+      "whois",
+      "yakuake",
+
+      "dropbox",
+      "python-gpgme",
+      "fcitx",
+      "fcitx-mozc",
+      "kde-config-fcitx",
+
+      "ansible",
+      "default-jre-headless",
+      "docker-engine",
+      "g++",
+      "git",
+      "kdesdk-dolphin-plugins",
+      "python-libcloud",
+      "virtualbox-5.0"
+    ],
+    "ubuntu": {
+      "all": [
+        "brackets",
+        "flashplugin-installer",
+        "muon"
+      ]
+    },
+    "debian": {
+      "all": [
+        "flashplugin-nonfree",
+        "apper"
+      ]
+    }
+  },
   "remove": {
     "all": [
       "akregator",
