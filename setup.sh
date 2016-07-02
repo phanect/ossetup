@@ -31,6 +31,9 @@ if [ "$DISTRO" = "ubuntu" ]; then
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME universe multiverse"
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-updates universe multiverse"
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-security universe multiverse"
+
+  # Add PPAs
+  sudo apt-add-repository ppa:ansible/ansible
 elif [ "$DISTRO" = "debian" ]; then
   DEBIAN_MAIN_REPO="http://ftp.jaist.ac.jp/debian/" # JAIST
   # local DEBIAN_MAIN_REPO="http://httpredir.debian.org/debian/" # Redir
@@ -54,9 +57,6 @@ apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
 # Add Docker Repo
 echo "deb https://apt.dockerproject.org/repo $DISTRO-$CODENAME main" | sudo tee /etc/apt/sources.list.d/docker.list
 apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-
-# Add Ansible Repo
-sudo apt-add-repository ppa:ansible/ansible
 
 sudo apt-get update
 sudo apt-get install -y curl flashplugin-installer fonts-vlgothic jq kolourpaint4 muon vlc whois yakuake \
@@ -112,7 +112,10 @@ fi
 PYTON_LATEST="$(pyenv install --list | tr --delete " " | grep --extended-regexp ^[0-9\.]+$ | tac | grep --max-count=1 .)"
 pyenv install "$PYTON_LATEST"
 pyenv global "$PYTON_LATEST"
-pip install ansible
+
+if [[ "$DISTRO" = "debian" ]]; then
+  pip install ansible
+fi
 
 #
 # git config
