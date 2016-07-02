@@ -25,10 +25,22 @@ sudo apt-get remove --yes $PKGS_REMOVE
 sudo apt-get autoremove -y
 sudo apt-get dist-upgrade -y
 
-# Add universe and multiverse
-sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME universe multiverse"
-sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-updates universe multiverse"
-sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-security universe multiverse"
+if [ "$DISTRO" = "ubuntu" ]; then
+  # Add universe and multiverse
+  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME universe multiverse"
+  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-updates universe multiverse"
+  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-security universe multiverse"
+elif [ "$DISTRO" = "debian" ]; then
+  DEBIAN_MAIN_REPO="http://ftp.jaist.ac.jp/debian/" # JAIST
+  # local DEBIAN_MAIN_REPO="http://httpredir.debian.org/debian/" # Redir
+
+  sudo rm -f /etc/apt/sources.list
+  sudo touch /etc/apt/sources.list
+
+  sudo add-apt-repository "deb $DEBIAN_MAIN_REPO $CODENAME main contrib non-free"
+  sudo add-apt-repository "deb $DEBIAN_MAIN_REPO $CODENAME-updates main contrib non-free"
+  sudo add-apt-repository "deb http://security.debian.org $CODENAME/updates main contrib non-free"
+fi
 
 # Add VirtualBox Repo
 sudo add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib"
