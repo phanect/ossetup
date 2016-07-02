@@ -75,10 +75,10 @@ dropbox start --install
 #
 
 # Get latest version of NVM
-NVM_LATEST=$(curl https://api.github.com/repos/creationix/nvm/releases/latest | jq --raw-output .name)
+NVM_LATEST=$(curl --silent --show-error https://api.github.com/repos/creationix/nvm/releases/latest | jq --raw-output .name)
 
 touch ~/.bashrc
-curl "https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh" | bash
+curl --silent --show-error "https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh" | bash
 source ~/.profile
 nvm install stable
 nvm use stable
@@ -86,7 +86,7 @@ nvm alias default stable
 npm install -g bower eslint geddy gulp
 
 # Python Environment Setup
-curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+curl --silent --show-error --location https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
 # Python build dependencies
 sudo apt-get install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev
