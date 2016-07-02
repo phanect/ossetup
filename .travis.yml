@@ -4,4 +4,4 @@ services:
   - docker
 
 script:
-  - docker run phanect/test-ossetup /bin/bash -c "cat /tmp/setup.sh | bash"
+  - docker run --volume="$(pwd):/tmp/ossetup" phanect/test-ossetup /bin/bash -c "chmod +x /tmp/ossetup/setup.sh; /tmp/ossetup/setup.sh
