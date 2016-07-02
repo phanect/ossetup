@@ -37,6 +37,7 @@ if [ "$DISTRO" = "ubuntu" ]; then
 
   # Add PPAs
   sudo apt-add-repository ppa:ansible/ansible
+  sudo add-apt-repository ppa:webupd8team/brackets
 elif [ "$DISTRO" = "debian" ]; then
   DEBIAN_MAIN_REPO="http://ftp.jaist.ac.jp/debian/" # JAIST
   # local DEBIAN_MAIN_REPO="http://httpredir.debian.org/debian/" # Redir
@@ -63,17 +64,6 @@ apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E8
 
 sudo apt-get update
 sudo apt-get install --yes $PKGS_INSTALL
-
-# Brackets
-if [[ "$CODENAME" == "vivid" ]]; then
-  # TODO Link no longer work, replace it to one provided in Ubuntu 14.04 LTS official repo
-  wget -O libgcrypt11.deb http://mirrors.kernel.org/ubuntu/pool/main/libg/libgcrypt11/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb
-  sudo dpkg --install ./libgcrypt11.deb
-fi
-
-wget -O brackets.deb https://github.com/adobe/brackets/releases/download/release-1.5/Brackets.Release.1.5.64-bit.deb
-sudo dpkg --install ./brackets.deb
-sudo apt-get install --fix-broken
 
 sudo rm -f "$PATH_TMP_REPO_LIST"
 
