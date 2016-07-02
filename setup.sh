@@ -5,18 +5,22 @@ set -eu
 sudo apt-get update
 sudo apt-get install --yes apt-transport-https curl jq lsb-release software-properties-common sudo wget
 
+PATH_PACKAGES_JSON="$(dirname "$BASH_SOURCE")/packages.json"
+
+DISTRO="$(lsb_release --short --id)"
+DISTRO="${DISTRO,,}" # Make lowercase: e.g. Debian -> debian, Ubuntu -> ubuntu
 CODENAME="$(lsb_release --short --codename)"
+
+PKGS_REMOVE="$(jq --raw-output '.remove.all | join(" ")' < "$PATH_PACKAGES_JSON")"
+PKGS_REMOVE="$PKGS_REMOVE $(jq --raw-output ".remove.$DISTRO.all | join(\" \")" < "$PATH_PACKAGES_JSON")"
+PKGS_REMOVE="$PKGS_REMOVE $(jq --raw-output ".remove.$DISTRO.$CODENAME | join(\" \")" < "$PATH_PACKAGES_JSON")"
 
 rm -rf /tmp/setup-phanective
 
 mkdir /tmp/setup-phanective
 cd /tmp/setup-phanective
 
-sudo apt-get remove -y akregator amarok dragonplayer kaddressbook \
-kde-telepathy-contact-list kde-telepathy-legacy-presence-applet \
-kde-telepathy-text-ui kmail kontact konversation korganizer krdc ktorrent \
-fonts-droid fonts-horai-umefont fonts-takao-pgothic \
-openjdk-7-jre openjdk-7-jre-headless partitionmanager
+sudo apt-get remove --yes $PKGS_REMOVE
 
 sudo apt-get autoremove -y
 sudo apt-get dist-upgrade -y

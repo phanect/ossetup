@@ -1,0 +1,31 @@
+{
+  "remove": {
+    "all": [
+      "akregator",
+      "amarok",
+      "dragonplayer",
+      "kaddressbook",
+      "kde-telepathy-contact-list",
+      "kde-telepathy-text-ui",
+      "kmail",
+      "kontact",
+      "konversation",
+      "korganizer",
+      "krdc",
+      "ktorrent",
+      "fonts-droid",
+      "fonts-horai-umefont",
+      "openjdk-7-jre",
+      "openjdk-7-jre-headless",
+      "partitionmanager"
+    ],
+    "ubuntu": {
+      "all": [
+        "fonts-takao-pgothic"
+      ],
+      "werewolf": [
+        "kde-telepathy-legacy-presence-applet"
+      ]
+    }
+  }
+}
