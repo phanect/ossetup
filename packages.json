@@ -24,7 +24,6 @@
       "g++",
       "git",
       "kdesdk-dolphin-plugins",
-      "python-libcloud",
       "openjdk-8-jdk",
       "virtualbox-5.0"
     ],
