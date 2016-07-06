@@ -46,6 +46,7 @@ elif [ "$DISTRO" = "debian" ]; then
 
   sudo add-apt-repository "deb $DEBIAN_MAIN_REPO $CODENAME main contrib non-free"
   sudo add-apt-repository "deb $DEBIAN_MAIN_REPO $CODENAME-updates main contrib non-free"
+  sudo add-apt-repository "deb $DEBIAN_MAIN_REPO $CODENAME-backports main contrib non-free" # for openjdk-8-*
   sudo add-apt-repository "deb http://security.debian.org $CODENAME/updates main contrib non-free"
 fi
 

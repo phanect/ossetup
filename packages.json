@@ -20,12 +20,12 @@
       "kde-config-fcitx",
 
       "ansible",
-      "default-jre-headless",
       "docker-engine",
       "g++",
       "git",
       "kdesdk-dolphin-plugins",
       "python-libcloud",
+      "openjdk-8-jdk",
       "virtualbox-5.0"
     ],
     "ubuntu": {
@@ -58,8 +58,7 @@
       "ktorrent",
       "fonts-droid",
       "fonts-horai-umefont",
-      "openjdk-7-jre",
-      "openjdk-7-jre-headless",
+      "openjdk-7-*",
       "partitionmanager"
     ],
     "ubuntu": {
