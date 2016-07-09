@@ -1,0 +1,9 @@
+box: phanect/test-ossetup
+
+build:
+  steps:
+    - script:
+        name: Running setup.sh
+        code: |
+          chmod +x ./setup.sh
+          ./setup.sh

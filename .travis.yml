@@ -1,7 +1,0 @@
-language: bash
-sudo: required
-services:
-  - docker
-
-script:
-  - docker run --volume="$(pwd):/tmp/ossetup" phanect/test-ossetup /bin/bash -c "chmod +x /tmp/ossetup/setup.sh; /tmp/ossetup/setup.sh
