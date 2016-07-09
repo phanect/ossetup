@@ -81,9 +81,9 @@ NVM_LATEST=$(curl --silent --show-error https://api.github.com/repos/creationix/
 touch ~/.bashrc
 curl --silent --show-error "https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh" | bash
 source ~/.profile
-nvm install stable
-nvm use stable
-nvm alias default stable
+nvm install 4
+nvm use 4
+nvm alias default 4
 npm install -g bower eslint geddy gulp
 
 # Python Environment Setup
