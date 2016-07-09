@@ -24,6 +24,7 @@
       "g++",
       "git",
       "kdesdk-dolphin-plugins",
+      "make",
       "openjdk-8-jdk",
       "virtualbox-5.0"
     ],
