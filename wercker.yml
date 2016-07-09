@@ -1,9 +1,16 @@
-box: phanect/debian-kde
-
-build:
+build-ubuntu:
+  box: phanect/kubuntu:xenial
   steps:
     - script:
-        name: Running setup.sh
+        name: "[Kubuntu] Running setup.sh"
+        code: |
+          chmod +x ./setup.sh
+          ./setup.sh
+build-debian:
+  box: phanect/debian-kde
+  steps:
+    - script:
+        name: "[Debian] Running setup.sh"
         code: |
           chmod +x ./setup.sh
           ./setup.sh
