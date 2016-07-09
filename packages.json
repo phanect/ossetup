@@ -26,6 +26,7 @@
       "kdesdk-dolphin-plugins",
       "make",
       "openjdk-8-jdk",
+      "openssh-client",
       "virtualbox-5.0"
     ],
     "ubuntu": {
