@@ -1,4 +1,4 @@
-box: phanect/test-ossetup
+box: phanect/debian-kde
 
 build:
   steps:
