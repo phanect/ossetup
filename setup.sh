@@ -84,6 +84,7 @@ source ~/.profile
 nvm install 4
 nvm use 4
 nvm alias default 4
+npm install --global npm
 npm install -g bower eslint geddy gulp
 
 # Python Environment Setup
