@@ -11,12 +11,12 @@ DISTRO="$(lsb_release --short --id)"
 DISTRO="${DISTRO,,}" # Make lowercase: e.g. Debian -> debian, Ubuntu -> ubuntu
 CODENAME="$(lsb_release --short --codename)"
 
-PKGS_INSTALL="$(jq --raw-output '.install.all | join(" ")' < "$PATH_PACKAGES_JSON")"
-PKGS_INSTALL="$PKGS_INSTALL $(jq --raw-output ".install.$DISTRO.all | join(\" \")" < "$PATH_PACKAGES_JSON")"
-PKGS_INSTALL="$PKGS_INSTALL $(jq --raw-output ".install.$DISTRO.$CODENAME | join(\" \")" < "$PATH_PACKAGES_JSON")"
-PKGS_REMOVE="$(jq --raw-output '.remove.all | join(" ")' < "$PATH_PACKAGES_JSON")"
-PKGS_REMOVE="$PKGS_REMOVE $(jq --raw-output ".remove.$DISTRO.all | join(\" \")" < "$PATH_PACKAGES_JSON")"
-PKGS_REMOVE="$PKGS_REMOVE $(jq --raw-output ".remove.$DISTRO.$CODENAME | join(\" \")" < "$PATH_PACKAGES_JSON")"
+PKGS_INSTALL="$(jq --raw-output '.install.all | arrays | join(" ")' < "$PATH_PACKAGES_JSON")"
+PKGS_INSTALL="$PKGS_INSTALL $(jq --raw-output ".install.$DISTRO.all | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
+PKGS_INSTALL="$PKGS_INSTALL $(jq --raw-output ".install.$DISTRO.$CODENAME | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
+PKGS_REMOVE="$(jq --raw-output '.remove.all | arrays | join(" ")' < "$PATH_PACKAGES_JSON")"
+PKGS_REMOVE="$PKGS_REMOVE $(jq --raw-output ".remove.$DISTRO.all | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
+PKGS_REMOVE="$PKGS_REMOVE $(jq --raw-output ".remove.$DISTRO.$CODENAME | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
 
 rm -rf /tmp/setup-phanective
 
