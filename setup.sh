@@ -80,8 +80,14 @@ NVM_LATEST=$(curl --silent --show-error https://api.github.com/repos/creationix/
 
 touch ~/.bashrc
 curl --silent --show-error "https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh" | bash
-source ~/.profile
+
+# - .bashrc may occur error
+# - nvm doesn't work on strict mode
+set +eu
+. ~/.nvm/nvm.sh # .bashrc doesn't run without GUI on Ubuntu; Load nvm.sh directly
 nvm install 4
+set -eux
+
 nvm use 4
 nvm alias default 4
 npm install --global npm
