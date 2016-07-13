@@ -30,9 +30,9 @@ sudo apt-get dist-upgrade -y
 
 if [ "$DISTRO" = "ubuntu" ]; then
   # Add universe and multiverse
-  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME universe multiverse"
-  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-updates universe multiverse"
-  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-security universe multiverse"
+  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME main restricted universe multiverse"
+  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-updates main restricted universe multiverse"
+  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-security main restricted universe multiverse"
 
   # Add PPAs
   sudo apt-add-repository ppa:ansible/ansible
