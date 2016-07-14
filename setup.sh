@@ -150,5 +150,3 @@ ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -N ""
 fi
 
 rm -rf /tmp/setup-phanective
-
-source ~/.bashrc
