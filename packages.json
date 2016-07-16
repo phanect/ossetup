@@ -48,19 +48,30 @@
       "akregator",
       "amarok",
       "dragonplayer",
+      "jovie",
+      "juk",
       "kaddressbook",
       "kde-telepathy-contact-list",
       "kde-telepathy-text-ui",
+      "kmag",
       "kmail",
+      "kmousetool",
+      "kmouth",
+      "knotes",
       "kontact",
       "konversation",
+      "kopete",
       "korganizer",
+      "kwrite",
       "krdc",
       "ktorrent",
       "fonts-droid",
       "fonts-horai-umefont",
+      "libreoffice",
+      "libreoffice-*",
       "openjdk-7-*",
-      "partitionmanager"
+      "partitionmanager",
+      "xterm"
     ],
     "ubuntu": {
       "all": [
@@ -68,6 +79,15 @@
       ],
       "werewolf": [
         "kde-telepathy-legacy-presence-applet"
+      ]
+    },
+    "debian": {
+      "all": [
+        "kde-full",
+        "kde-standard",
+        "kdeplasma-addons",
+        "plasma-scriptengine-superkaramba",
+        "plasma-widget-lancelot"
       ]
     }
   }
