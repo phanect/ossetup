@@ -61,10 +61,17 @@ apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E8
 sudo apt-get update -qq
 
 # Install from deb files
+curl --silent --show-error --output /tmp/setup-phanective/atom.deb --location "https://atom.io/download/deb"
 curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$DISTRO/dropbox_2015.10.28_amd64.deb"
 curl --silent --show-error --output /tmp/setup-phanective/vagrant.deb --location "https://releases.hashicorp.com/vagrant/1.8.4/vagrant_1.8.4_x86_64.deb"
 
-set +eu; sudo dpkg --install /tmp/setup-phanective/dropbox.deb /tmp/setup-phanective/vagrant.deb; set -eu # Occurs error that dependencies are not installed
+# Ignore error that dependencies are not installed
+set +eu
+  sudo dpkg --install \
+    /tmp/setup-phanective/atom.deb \
+    /tmp/setup-phanective/dropbox.deb \
+    /tmp/setup-phanective/vagrant.deb
+set -eux
 
 sudo apt-get --fix-broken install --yes --no-install-recommends $PKGS_INSTALL
 
@@ -72,6 +79,32 @@ sudo apt-get --fix-broken install --yes --no-install-recommends $PKGS_INSTALL
 (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -)
 dropbox autostart y
 dropbox start --install
+
+#
+# Atom plugins
+#
+apm install atom-jinja2 \
+  atom-typescript \
+  auto-indent \
+  editorconfig \
+  highlight-selected \
+  indent-toggle-on-paste \
+  incremental-search \
+  language-bats \
+  language-docker \
+  language-json5 \
+  linter \
+  linter-csslint \
+  linter-eslint \
+  linter-htmlhint \
+  linter-js-yaml \
+  linter-jsonlint \
+  linter-pep8 \
+  linter-php \
+  linter-phpcs \
+  linter-rubocop \
+  linter-shellcheck \
+  linter-tidy
 
 # Vagrant plugins
 vagrant plugin install vagrant-vbguest
