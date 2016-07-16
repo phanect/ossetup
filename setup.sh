@@ -73,7 +73,8 @@ set +eu
     /tmp/setup-phanective/vagrant.deb
 set -eux
 
-sudo apt-get --fix-broken install --yes --no-install-recommends $PKGS_INSTALL
+sudo apt-get --fix-broken install --yes
+sudo apt-get install --yes --no-install-recommends $PKGS_INSTALL
 
 # Dropbox proprietary daemon installation
 (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -)
