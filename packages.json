@@ -1,0 +1,96 @@
+{
+  "install": {
+    "all": [
+      "apt-transport-https",
+      "curl",
+      "colordiff",
+      "firefox",
+      "fonts-vlgothic",
+      "jq",
+      "kolourpaint4",
+      "sudo",
+      "vlc",
+      "wget",
+      "whois",
+      "yakuake",
+
+      "dropbox",
+      "python-gpgme",
+      "fcitx",
+      "fcitx-mozc",
+      "kde-config-fcitx",
+
+      "ansible",
+      "docker-engine",
+      "g++",
+      "git",
+      "kdesdk-dolphin-plugins",
+      "make",
+      "openjdk-8-jdk",
+      "openssh-client",
+      "virtualbox-5.0"
+    ],
+    "ubuntu": {
+      "all": [
+        "brackets",
+        "flashplugin-installer",
+        "muon"
+      ]
+    },
+    "debian": {
+      "all": [
+        "flashplugin-nonfree",
+        "apper",
+        "pkg-mozilla-archive-keyring"
+      ]
+    }
+  },
+  "remove": {
+    "all": [
+      "akregator",
+      "amarok",
+      "dragonplayer",
+      "jovie",
+      "juk",
+      "kaddressbook",
+      "kde-telepathy-contact-list",
+      "kde-telepathy-text-ui",
+      "kmag",
+      "kmail",
+      "kmousetool",
+      "kmouth",
+      "knotes",
+      "kontact",
+      "konversation",
+      "kopete",
+      "korganizer",
+      "kwrite",
+      "krdc",
+      "ktorrent",
+      "fonts-droid",
+      "fonts-horai-umefont",
+      "libreoffice",
+      "libreoffice-*",
+      "openjdk-7-*",
+      "partitionmanager",
+      "xterm"
+    ],
+    "ubuntu": {
+      "all": [
+        "fonts-takao-pgothic"
+      ],
+      "werewolf": [
+        "kde-telepathy-legacy-presence-applet"
+      ]
+    },
+    "debian": {
+      "all": [
+        "kde-full",
+        "kde-standard",
+        "kdeplasma-addons",
+        "plasma-scriptengine-superkaramba",
+        "plasma-widget-lancelot"
+      ]
+    }
+  }
+}
