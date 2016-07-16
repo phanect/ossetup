@@ -18,15 +18,15 @@ PKGS_REMOVE="$(jq --raw-output '.remove.all | arrays | join(" ")' < "$PATH_PACKA
 PKGS_REMOVE="$PKGS_REMOVE $(jq --raw-output ".remove.$DISTRO.all | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
 PKGS_REMOVE="$PKGS_REMOVE $(jq --raw-output ".remove.$DISTRO.$CODENAME | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
 
-rm -rf /tmp/setup-phanective
+rm --recursive --force /tmp/setup-phanective
 
 mkdir /tmp/setup-phanective
 cd /tmp/setup-phanective
 
 sudo apt-get remove --yes $PKGS_REMOVE
 
-sudo apt-get autoremove -y
-sudo apt-get dist-upgrade -y
+sudo apt-get autoremove --yes
+sudo apt-get dist-upgrade --yes
 
 if [ "$DISTRO" = "ubuntu" ]; then
   # Add universe and multiverse
@@ -41,7 +41,7 @@ elif [ "$DISTRO" = "debian" ]; then
   DEBIAN_MAIN_REPO="http://ftp.jaist.ac.jp/debian/" # JAIST
   # local DEBIAN_MAIN_REPO="http://httpredir.debian.org/debian/" # Redir
 
-  sudo rm -f /etc/apt/sources.list
+  sudo rm --force /etc/apt/sources.list
   sudo touch /etc/apt/sources.list
 
   sudo add-apt-repository "deb $DEBIAN_MAIN_REPO $CODENAME main contrib non-free"
@@ -91,13 +91,13 @@ set -eux
 nvm use 4
 nvm alias default 4
 npm install --global npm
-npm install -g bower eslint geddy gulp
+npm install --global bower eslint geddy gulp
 
 # Python Environment Setup
 curl --silent --show-error --location https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
 # Python build dependencies
-sudo apt-get install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev make
+sudo apt-get install --yes libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev make
 
 if ! grep --fixed-strings --line-regexp "# PyEnv" ~/.bashrc; then
 cat << _EOF_ >> ~/.bashrc
@@ -149,4 +149,4 @@ if [[ ! -f ~/.ssh/id_rsa ]]; then
 ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -N ""
 fi
 
-rm -rf /tmp/setup-phanective
+rm --recursive --force /tmp/setup-phanective
