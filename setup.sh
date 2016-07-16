@@ -60,9 +60,11 @@ apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E8
 
 sudo apt-get update -qq
 
-# Install Dropbox
+# Install from deb files
 curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$DISTRO/dropbox_2015.10.28_amd64.deb"
-set +eu; sudo dpkg --install /tmp/setup-phanective/dropbox.deb; set -eu # Occurs error that dependencies are not installed
+curl --silent --show-error --output /tmp/setup-phanective/vagrant.deb --location "https://releases.hashicorp.com/vagrant/1.8.4/vagrant_1.8.4_x86_64.deb"
+
+set +eu; sudo dpkg --install /tmp/setup-phanective/dropbox.deb /tmp/setup-phanective/vagrant.deb; set -eu # Occurs error that dependencies are not installed
 
 sudo apt-get --fix-broken install --yes --no-install-recommends $PKGS_INSTALL
 
@@ -70,6 +72,9 @@ sudo apt-get --fix-broken install --yes --no-install-recommends $PKGS_INSTALL
 (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -)
 dropbox autostart y
 dropbox start --install
+
+# Vagrant plugins
+vagrant plugin install vagrant-vbguest
 
 #
 # Node.js Environment Setup
