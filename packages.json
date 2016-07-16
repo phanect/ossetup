@@ -4,6 +4,7 @@
       "apt-transport-https",
       "curl",
       "colordiff",
+      "firefox",
       "fonts-vlgothic",
       "jq",
       "kolourpaint4",
@@ -39,7 +40,8 @@
     "debian": {
       "all": [
         "flashplugin-nonfree",
-        "apper"
+        "apper",
+        "pkg-mozilla-archive-keyring"
       ]
     }
   },
