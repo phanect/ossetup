@@ -130,6 +130,8 @@ fi
 
 # Don't commit file permission change
 git config --global core.fileMode false
+# Allow `git push`
+git config --global push.default simple
 
 #
 # Aliases
