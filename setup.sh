@@ -2,6 +2,8 @@
 
 set -eux
 
+DEBIAN_FRONTEND=noninteractive
+
 sudo apt-get update -qq
 sudo apt-get install --yes apt-transport-https curl jq lsb-release software-properties-common sudo wget
 
