@@ -2,6 +2,9 @@ build-ubuntu:
   box: phanect/kubuntu:xenial
   steps:
     - script:
+        name: "[Kubuntu] Install packages which prompts on apt-get"
+        code: sudo apt-get update -qq && DEBIAN_FRONTEND=noninteractive sudo apt-get install --yes --allow-change-held-packages console-setup console-setup-linux
+    - script:
         name: "[Kubuntu] Running setup.sh"
         code: |
           chmod +x ./setup.sh
