@@ -101,6 +101,7 @@ apm install atom-jinja2 \
   language-docker \
   language-json5 \
   language-twig \
+  language-vue \
   linter \
   linter-csslint \
   linter-eslint \
