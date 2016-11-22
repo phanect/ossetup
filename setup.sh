@@ -98,7 +98,9 @@ apm install atom-jinja2 \
   indent-toggle-on-paste \
   incremental-search \
   language-bats \
+  language-diff \
   language-docker \
+  language-htaccess \
   language-json5 \
   language-twig \
   language-vue \
@@ -111,6 +113,7 @@ apm install atom-jinja2 \
   linter-pep8 \
   linter-php \
   linter-phpcs \
+  linter-phpmd \
   linter-rubocop \
   linter-shellcheck \
   linter-tidy
