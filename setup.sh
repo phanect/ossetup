@@ -56,6 +56,9 @@ elif [ "$DISTRO" = "debian" ]; then
   echo "deb http://mozilla.debian.net/ $CODENAME-backports firefox-release" | sudo tee /etc/apt/sources.list.d/firefox.list
 fi
 
+# Add Node.js Repo
+curl --silent --location https://deb.nodesource.com/setup_6.x | sudo --preserve-env bash -
+
 # Add VirtualBox Repo
 echo "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
@@ -121,25 +124,7 @@ apm install atom-jinja2 \
 # Vagrant plugins
 vagrant plugin install vagrant-vbguest
 
-#
-# Node.js Environment Setup
-#
-
-# Get latest version of NVM
-NVM_LATEST=$(curl --silent --show-error https://api.github.com/repos/creationix/nvm/releases/latest | jq --raw-output .name)
-
-touch ~/.bashrc
-curl --silent --show-error "https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh" | bash
-
-# - .bashrc may occur error
-# - nvm doesn't work on strict mode
-set +eu
-. ~/.nvm/nvm.sh # .bashrc doesn't run without GUI on Ubuntu; Load nvm.sh directly
-nvm install 4
-set -eux
-
-nvm use 4
-nvm alias default 4
+# NPMs
 npm install --global npm
 npm install --global bower eslint geddy gulp
 
