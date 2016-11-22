@@ -126,7 +126,7 @@ vagrant plugin install vagrant-vbguest
 
 # NPMs
 npm install --global npm
-npm install --global bower eslint geddy gulp
+npm install --global bower eslint gulp
 
 # Python Environment Setup
 curl --silent --show-error --location https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
