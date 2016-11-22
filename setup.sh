@@ -125,7 +125,7 @@ apm install atom-jinja2 \
 vagrant plugin install vagrant-vbguest
 
 # NPMs
-npm install --global npm
+npm update --global
 npm install --global bower eslint gulp
 
 # Python Environment Setup
