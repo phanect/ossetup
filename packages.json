@@ -30,7 +30,8 @@
       "nodejs",
       "openjdk-8-jdk",
       "openssh-client",
-      "virtualbox-5.1"
+      "virtualbox-5.1",
+      "yarn"
     ],
     "ubuntu": {
       "all": [

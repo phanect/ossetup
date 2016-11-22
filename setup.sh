@@ -59,6 +59,10 @@ fi
 # Add Node.js Repo
 curl --silent --location https://deb.nodesource.com/setup_6.x | sudo --preserve-env bash -
 
+# Add yarn Repo
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
 # Add VirtualBox Repo
 echo "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
