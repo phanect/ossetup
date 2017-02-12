@@ -4,6 +4,10 @@ jobs:
   build:
     working_directory: ~/ossetup
     docker:
+      - image: kdeneon/all:user-lts
+        cmd: ["/bin/bash"]
+      - image: kdeneon/all:user
+        cmd: ["/bin/bash"]
       - image: phanect/kubuntu:xenial
       - image: phanect/debian-kde
     steps:
