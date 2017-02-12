@@ -35,7 +35,7 @@ sudo apt-get remove --yes $PKGS_REMOVE
 sudo apt-get autoremove --yes
 sudo apt-get dist-upgrade --yes
 
-if [ "$BASEDIST" = "ubuntu" ]; then
+if [[ "$BASEDIST" = "ubuntu" ]]; then
   # Add universe and multiverse
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME main restricted universe multiverse"
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-updates main restricted universe multiverse"
@@ -44,7 +44,7 @@ if [ "$BASEDIST" = "ubuntu" ]; then
   # Add PPAs
   sudo add-apt-repository --yes ppa:ansible/ansible
   sudo add-apt-repository --yes ppa:webupd8team/brackets
-elif [ "$BASEDIST" = "debian" ]; then
+elif [[ "$BASEDIST" = "debian" ]]; then
   DEBIAN_MAIN_REPO="http://ftp.jaist.ac.jp/debian/" # JAIST
   # local DEBIAN_MAIN_REPO="http://httpredir.debian.org/debian/" # Redir
 
