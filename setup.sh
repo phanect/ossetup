@@ -13,6 +13,11 @@ DISTRO="$(lsb_release --short --id)"
 DISTRO="${DISTRO,,}" # Make lowercase: e.g. Debian -> debian, Ubuntu -> ubuntu
 CODENAME="$(lsb_release --short --codename)"
 
+BASEDIST="$DISTRO"
+if [[ "$BASEDIST" = "neon" ]]; then
+  BASEDIST="ubuntu"
+fi
+
 PKGS_INSTALL="$(jq --raw-output '.install.all | arrays | join(" ")' < "$PATH_PACKAGES_JSON")"
 PKGS_INSTALL="$PKGS_INSTALL $(jq --raw-output ".install.$DISTRO.all | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
 PKGS_INSTALL="$PKGS_INSTALL $(jq --raw-output ".install.$DISTRO.$CODENAME | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
@@ -30,7 +35,7 @@ sudo apt-get remove --yes $PKGS_REMOVE
 sudo apt-get autoremove --yes
 sudo apt-get dist-upgrade --yes
 
-if [ "$DISTRO" = "ubuntu" ]; then
+if [ "$BASEDIST" = "ubuntu" ]; then
   # Add universe and multiverse
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME main restricted universe multiverse"
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-updates main restricted universe multiverse"
@@ -39,7 +44,7 @@ if [ "$DISTRO" = "ubuntu" ]; then
   # Add PPAs
   sudo apt-add-repository ppa:ansible/ansible
   sudo add-apt-repository ppa:webupd8team/brackets
-elif [ "$DISTRO" = "debian" ]; then
+elif [ "$BASEDIST" = "debian" ]; then
   DEBIAN_MAIN_REPO="http://ftp.jaist.ac.jp/debian/" # JAIST
   # local DEBIAN_MAIN_REPO="http://httpredir.debian.org/debian/" # Redir
 
@@ -68,14 +73,14 @@ echo "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib" | 
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 
 # Add Docker Repo
-echo "deb https://apt.dockerproject.org/repo $DISTRO-$CODENAME main" | sudo tee /etc/apt/sources.list.d/docker.list
+echo "deb https://apt.dockerproject.org/repo $BASEDIST-$CODENAME main" | sudo tee /etc/apt/sources.list.d/docker.list
 sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
 sudo apt-get update -qq
 
 # Install from deb files
 curl --silent --show-error --output /tmp/setup-phanective/atom.deb --location "https://atom.io/download/deb"
-curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$DISTRO/dropbox_2015.10.28_amd64.deb"
+curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$BASEDIST/dropbox_2015.10.28_amd64.deb"
 curl --silent --show-error --output /tmp/setup-phanective/vagrant.deb --location "https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb"
 
 # Ignore error that dependencies are not installed
@@ -159,7 +164,7 @@ pyenv install "$PYTON_LATEST"
 pyenv global "$PYTON_LATEST"
 set -eux
 
-if [[ "$DISTRO" = "debian" ]]; then
+if [[ "$BASEDIST" = "debian" ]]; then
   pip install ansible
 fi
 
