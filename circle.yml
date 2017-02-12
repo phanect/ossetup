@@ -1,0 +1,18 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/ossetup
+    docker:
+      - image: phanect/kubuntu:xenial
+      - image: phanect/debian-kde
+    steps:
+      - run:
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get install --yes git
+      - checkout
+      - run:
+          command: |
+            chmod +x ./setup.sh
+            ./setup.sh
