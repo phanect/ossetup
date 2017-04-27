@@ -42,7 +42,7 @@ if [ "$BASEDIST" = "ubuntu" ]; then
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-security main restricted universe multiverse"
 
   # Add PPAs
-  sudo apt-add-repository ppa:ansible/ansible
+  sudo add-apt-repository ppa:ansible/ansible
   sudo add-apt-repository ppa:webupd8team/brackets
 elif [ "$BASEDIST" = "debian" ]; then
   DEBIAN_MAIN_REPO="http://ftp.jaist.ac.jp/debian/" # JAIST
