@@ -70,8 +70,8 @@ echo "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib" | 
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 
 # Add Docker Repo
-echo "deb https://apt.dockerproject.org/repo $BASEDIST-$CODENAME main" | sudo tee /etc/apt/sources.list.d/docker.list
-sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+echo "deb [arch=amd64] https://download.docker.com/linux/$BASEDIST $CODENAME stable" | sudo tee /etc/apt/sources.list.d/docker.list
+curl -fsSL "https://download.docker.com/linux/$BASEDIST/gpg" | sudo apt-key add -
 
 sudo apt-get update -qq
 
