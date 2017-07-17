@@ -94,7 +94,6 @@ sudo apt-get install --yes --no-install-recommends $PKGS_INSTALL
 # Dropbox proprietary daemon installation
 (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -)
 dropbox autostart y
-dropbox start --install
 
 #
 # Atom plugins
