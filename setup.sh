@@ -13,6 +13,11 @@ DISTRO="$(lsb_release --short --id)"
 DISTRO="${DISTRO,,}" # Make lowercase: e.g. Debian -> debian, Ubuntu -> ubuntu
 CODENAME="$(lsb_release --short --codename)"
 
+BASEDIST="$DISTRO"
+if [[ "$BASEDIST" = "neon" ]]; then
+  BASEDIST="ubuntu"
+fi
+
 PKGS_INSTALL="$(jq --raw-output '.install.all | arrays | join(" ")' < "$PATH_PACKAGES_JSON")"
 PKGS_INSTALL="$PKGS_INSTALL $(jq --raw-output ".install.$DISTRO.all | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
 PKGS_INSTALL="$PKGS_INSTALL $(jq --raw-output ".install.$DISTRO.$CODENAME | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
@@ -30,16 +35,16 @@ sudo apt-get remove --yes $PKGS_REMOVE
 sudo apt-get autoremove --yes
 sudo apt-get dist-upgrade --yes
 
-if [ "$DISTRO" = "ubuntu" ]; then
+if [[ "$BASEDIST" = "ubuntu" ]]; then
   # Add universe and multiverse
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME main restricted universe multiverse"
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-updates main restricted universe multiverse"
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-security main restricted universe multiverse"
 
   # Add PPAs
-  sudo apt-add-repository ppa:ansible/ansible
-  sudo add-apt-repository ppa:webupd8team/brackets
-elif [ "$DISTRO" = "debian" ]; then
+  sudo add-apt-repository --yes ppa:ansible/ansible
+  sudo add-apt-repository --yes ppa:webupd8team/brackets
+elif [[ "$BASEDIST" = "debian" ]]; then
   DEBIAN_MAIN_REPO="http://ftp.jaist.ac.jp/debian/" # JAIST
   # local DEBIAN_MAIN_REPO="http://httpredir.debian.org/debian/" # Redir
 
@@ -56,9 +61,6 @@ elif [ "$DISTRO" = "debian" ]; then
   echo "deb http://mozilla.debian.net/ $CODENAME-backports firefox-release" | sudo tee /etc/apt/sources.list.d/firefox.list
 fi
 
-# Add Node.js Repo
-curl --silent --location https://deb.nodesource.com/setup_6.x | sudo --preserve-env bash -
-
 # Add yarn Repo
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -68,14 +70,14 @@ echo "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib" | 
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 
 # Add Docker Repo
-echo "deb https://apt.dockerproject.org/repo $DISTRO-$CODENAME main" | sudo tee /etc/apt/sources.list.d/docker.list
-sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+echo "deb [arch=amd64] https://download.docker.com/linux/$BASEDIST $CODENAME stable" | sudo tee /etc/apt/sources.list.d/docker.list
+curl -fsSL "https://download.docker.com/linux/$BASEDIST/gpg" | sudo apt-key add -
 
 sudo apt-get update -qq
 
 # Install from deb files
 curl --silent --show-error --output /tmp/setup-phanective/atom.deb --location "https://atom.io/download/deb"
-curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$DISTRO/dropbox_2015.10.28_amd64.deb"
+curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$BASEDIST/dropbox_2015.10.28_amd64.deb"
 curl --silent --show-error --output /tmp/setup-phanective/vagrant.deb --location "https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb"
 
 # Ignore error that dependencies are not installed
@@ -92,7 +94,6 @@ sudo apt-get install --yes --no-install-recommends $PKGS_INSTALL
 # Dropbox proprietary daemon installation
 (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -)
 dropbox autostart y
-dropbox start --install
 
 #
 # Atom plugins
@@ -128,7 +129,25 @@ apm install atom-jinja2 \
 # Vagrant plugins
 vagrant plugin install vagrant-vbguest
 
-# NPMs
+#
+# Node.js Environment Setup
+#
+
+# Get latest version of NVM
+NVM_LATEST=$(curl --silent --show-error https://api.github.com/repos/creationix/nvm/releases/latest | jq --raw-output .name)
+
+touch ~/.bashrc
+curl --silent --show-error "https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh" | bash
+
+# - .bashrc may occur error
+# - nvm doesn't work on strict mode
+set +eux
+. ~/.nvm/nvm.sh # .bashrc doesn't run without GUI on Ubuntu; Load nvm.sh directly
+nvm install 6
+nvm use 6
+nvm alias default 6
+set -eux
+
 npm update --global
 npm install --global bower eslint gulp
 
@@ -159,7 +178,7 @@ pyenv install "$PYTON_LATEST"
 pyenv global "$PYTON_LATEST"
 set -eux
 
-if [[ "$DISTRO" = "debian" ]]; then
+if [[ "$BASEDIST" = "debian" ]]; then
   pip install ansible
 fi
 

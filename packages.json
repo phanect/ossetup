@@ -22,12 +22,11 @@
       "kde-config-fcitx",
 
       "ansible",
-      "docker-engine",
+      "docker-ce",
       "g++",
       "git",
       "kdesdk-dolphin-plugins",
       "make",
-      "nodejs",
       "openjdk-8-jdk",
       "openssh-client",
       "virtualbox-5.1",
