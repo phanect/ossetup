@@ -141,13 +141,13 @@ curl --silent --show-error "https://raw.githubusercontent.com/creationix/nvm/$NV
 
 # - .bashrc may occur error
 # - nvm doesn't work on strict mode
-set +eu
+set +eux
 . ~/.nvm/nvm.sh # .bashrc doesn't run without GUI on Ubuntu; Load nvm.sh directly
 nvm install 6
-set -eux
-
 nvm use 6
 nvm alias default 6
+set -eux
+
 npm update --global
 npm install --global bower eslint gulp
 
