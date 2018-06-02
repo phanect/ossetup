@@ -8,6 +8,8 @@
       "fonts-vlgothic",
       "jq",
       "kolourpaint4",
+      "ntp",
+      "ntpdate",
       "plasma-widget-folderview",
       "sudo",
       "vlc",
