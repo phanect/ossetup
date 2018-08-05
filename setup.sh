@@ -164,11 +164,6 @@ git config --global core.fileMode false
 # Allow `git push`
 git config --global push.default simple
 
-#
-# Allow non-root user to run Docker
-#
-sudo usermod --append --groups docker "$(whoami)"
-
 if [[ ! -f ~/.ssh/id_rsa ]]; then
 ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -N ""
 fi
