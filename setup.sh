@@ -100,15 +100,12 @@ apm install atom-jinja2 \
   highlight-selected \
   indent-toggle-on-paste \
   incremental-search \
-  language-bats \
   language-diff \
   language-docker \
   language-htaccess \
   language-json5 \
-  language-twig \
   language-vue \
   linter \
-  linter-csslint \
   linter-eslint \
   linter-htmlhint \
   linter-js-yaml \
@@ -116,10 +113,7 @@ apm install atom-jinja2 \
   linter-pep8 \
   linter-php \
   linter-phpcs \
-  linter-phpmd \
-  linter-rubocop \
-  linter-shellcheck \
-  linter-tidy
+  linter-shellcheck
 
 # Vagrant plugins
 vagrant plugin install vagrant-vbguest
