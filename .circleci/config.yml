@@ -1,0 +1,42 @@
+version: 2
+
+jobs:
+  build-neon:
+    working_directory: ~/ossetup
+    docker:
+      - image: kdeneon/all:user
+        cmd: ["/bin/bash"]
+    steps:
+      - run:
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get install --yes git
+      - checkout
+      - run:
+          command: |
+            chmod +x ./setup.sh
+            ./setup.sh
+
+  build-debian:
+    working_directory: ~/ossetup
+    docker:
+      - image: phanect/debian-kde
+    steps:
+      - run:
+          command: |
+            apt-get update -qq
+            apt-get install --yes git sudo
+      - checkout
+      - run:
+          command: |
+            chmod +x ./setup.sh
+            ./setup.sh
+
+workflows:
+  version: 2
+  build_all:
+    jobs:
+      - build-neon
+      # Debian is now disabled since I don't use Debian for now.
+      # Keep commented out for the time I will use Debian again
+      # - build-debian
