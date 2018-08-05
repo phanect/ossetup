@@ -3,9 +3,13 @@ version: 2
 jobs:
   build-neon:
     working_directory: ~/ossetup
+    environment:
+      DEBIAN_FRONTEND: noninteractive
     docker:
       - image: kdeneon/all:user
         cmd: ["/bin/bash"]
+        environment:
+          DEBIAN_FRONTEND: noninteractive
     steps:
       - run:
           command: |
@@ -19,8 +23,12 @@ jobs:
 
   build-debian:
     working_directory: ~/ossetup
+    environment:
+      DEBIAN_FRONTEND: noninteractive
     docker:
       - image: phanect/debian-kde
+        environment:
+          DEBIAN_FRONTEND: noninteractive
     steps:
       - run:
           command: |
