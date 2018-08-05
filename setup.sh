@@ -180,11 +180,6 @@ git config --global core.fileMode false
 git config --global push.default simple
 
 #
-# Allow non-root user to run Docker
-#
-sudo usermod --append --groups docker "$(whoami)"
-
-#
 # Aliases
 #
 if ! grep --fixed-strings --line-regexp "# colordiff" ~/.bashrc; then
