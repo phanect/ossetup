@@ -48,8 +48,6 @@ elif [[ "$BASEDIST" = "debian" ]]; then
   DEBIAN_MAIN_REPO="http://ftp.jaist.ac.jp/debian/" # JAIST
   # local DEBIAN_MAIN_REPO="http://httpredir.debian.org/debian/" # Redir
 
-  sudo apt-get install --yes pkg-mozilla-archive-keyring
-
   sudo rm --force /etc/apt/sources.list
   sudo touch /etc/apt/sources.list
 
@@ -57,8 +55,6 @@ elif [[ "$BASEDIST" = "debian" ]]; then
   sudo add-apt-repository "deb $DEBIAN_MAIN_REPO $CODENAME-updates main contrib non-free"
   sudo add-apt-repository "deb $DEBIAN_MAIN_REPO $CODENAME-backports main contrib non-free" # for openjdk-8-*
   sudo add-apt-repository "deb http://security.debian.org $CODENAME/updates main contrib non-free"
-
-  echo "deb http://mozilla.debian.net/ $CODENAME-backports firefox-release" | sudo tee /etc/apt/sources.list.d/firefox.list
 fi
 
 # Add yarn Repo
@@ -90,6 +86,11 @@ set -eux
 
 sudo apt-get --fix-broken install --yes
 sudo apt-get install --yes --no-install-recommends $PKGS_INSTALL
+
+# Snap
+if [[ "$BASEDIST" = "debian" ]]; then
+  snap install firefox
+fi
 
 # Dropbox proprietary daemon installation
 (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -)

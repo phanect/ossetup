@@ -4,7 +4,6 @@
       "apt-transport-https",
       "curl",
       "colordiff",
-      "firefox",
       "fonts-vlgothic",
       "jq",
       "kolourpaint4",
@@ -37,6 +36,7 @@
     "ubuntu": {
       "all": [
         "brackets",
+        "firefox",
         "flashplugin-installer",
         "muon"
       ]
@@ -45,7 +45,7 @@
       "all": [
         "flashplugin-nonfree",
         "apper",
-        "pkg-mozilla-archive-keyring"
+        "snapd"
       ]
     }
   },
