@@ -15,6 +15,7 @@ jobs:
           command: |
             sudo apt-get update -qq
             sudo apt-get install --yes git
+            sudo systemctl start snapd.service
       - checkout
       - run:
           command: |

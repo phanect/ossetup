@@ -66,14 +66,12 @@ curl -fsSL "https://download.docker.com/linux/$BASEDIST/gpg" | sudo apt-key add 
 sudo apt-get update -qq
 
 # Install from deb files
-curl --silent --show-error --output /tmp/setup-phanective/atom.deb --location "https://atom.io/download/deb"
 curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$BASEDIST/dropbox_2015.10.28_amd64.deb"
 curl --silent --show-error --output /tmp/setup-phanective/vagrant.deb --location "https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb"
 
 # Ignore error that dependencies are not installed
 set +eu
   sudo dpkg --install \
-    /tmp/setup-phanective/atom.deb \
     /tmp/setup-phanective/dropbox.deb \
     /tmp/setup-phanective/vagrant.deb
 set -eux
@@ -82,6 +80,8 @@ sudo apt-get --fix-broken install --yes
 sudo apt-get install --yes --no-install-recommends $PKGS_INSTALL
 
 # Snap
+sudo snap install atom --classic
+
 if [[ "$BASEDIST" = "debian" ]]; then
   snap install firefox
 fi
