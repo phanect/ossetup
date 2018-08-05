@@ -70,4 +70,6 @@ workflows:
       - build-neon
       - build-neon-lts
       - build-kubuntu
-      - build-debian
+      # Debian is now disabled since I don't use Debian for now.
+      # Keep commented out for the time I will use Debian again
+      # - build-debian
