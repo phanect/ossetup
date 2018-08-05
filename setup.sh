@@ -95,33 +95,57 @@ dropbox autostart y
 #
 # Atom plugins
 #
-apm install atom-jinja2 \
+apm install \
   atom-typescript \
   auto-indent \
+  autoclose-html \
   editorconfig \
   highlight-selected \
   indent-toggle-on-paste \
   incremental-search \
-  language-bats \
+  language-babel \
   language-diff \
   language-docker \
+  language-ejs \
+  language-gitignore \
   language-htaccess \
   language-json5 \
-  language-twig \
   language-vue \
   linter \
-  linter-csslint \
   linter-eslint \
-  linter-htmlhint \
+  linter-htmllint \
   linter-js-yaml \
   linter-jsonlint \
-  linter-pep8 \
   linter-php \
-  linter-phpcs \
-  linter-phpmd \
-  linter-rubocop \
-  linter-shellcheck \
-  linter-tidy
+  linter-shellcheck
+
+# Disable unused build-in packages
+# This doesn't work in most cases since apm disable requires ~/.atom/config.cson
+# which is generated on the first run of Atom.
+if [[ -f ~/.atom/config.cson ]]; then
+  apm disable \
+    atom-dark-syntax \
+    atom-dark-ui \
+    atom-light-syntax \
+    atom-light-ui \
+    base16-tomorrow-dark-theme \
+    base16-tomorrow-light-theme \
+    one-dark-ui \
+    one-dark-syntax \
+    solarized-dark-syntax \
+    solarized-light-syntax \
+    \
+    styleguide \
+    \
+    language-c \
+    language-clojure \
+    language-coffee-script \
+    language-csharp \
+    language-java \
+    language-objective-c \
+    language-perl \
+    language-property-list
+fi
 
 # Vagrant plugins
 vagrant plugin install vagrant-vbguest
