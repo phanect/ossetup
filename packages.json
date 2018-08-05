@@ -30,7 +30,7 @@
       "make",
       "openjdk-8-jdk",
       "openssh-client",
-      "virtualbox-5.1",
+      "virtualbox-6.1",
       "yarn"
     ],
     "ubuntu": {
