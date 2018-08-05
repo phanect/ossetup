@@ -17,37 +17,6 @@ jobs:
             chmod +x ./setup.sh
             ./setup.sh
 
-  build-neon-lts:
-    working_directory: ~/ossetup
-    docker:
-      - image: kdeneon/all:user-lts
-        cmd: ["/bin/bash"]
-    steps:
-      - run:
-          command: |
-            sudo apt-get update -qq
-            sudo apt-get install --yes git
-      - checkout
-      - run:
-          command: |
-            chmod +x ./setup.sh
-            ./setup.sh
-
-  build-kubuntu:
-    working_directory: ~/ossetup
-    docker:
-      - image: phanect/kubuntu:18.04
-    steps:
-      - run:
-          command: |
-            apt-get update -qq
-            apt-get install --yes git sudo
-      - checkout
-      - run:
-          command: |
-            chmod +x ./setup.sh
-            ./setup.sh
-
   build-debian:
     working_directory: ~/ossetup
     docker:
@@ -68,8 +37,6 @@ workflows:
   build_all:
     jobs:
       - build-neon
-      - build-neon-lts
-      - build-kubuntu
       # Debian is now disabled since I don't use Debian for now.
       # Keep commented out for the time I will use Debian again
       # - build-debian
