@@ -40,10 +40,6 @@ if [[ "$BASEDIST" = "ubuntu" ]]; then
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME main restricted universe multiverse"
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-updates main restricted universe multiverse"
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-security main restricted universe multiverse"
-
-  # Add PPAs
-  sudo add-apt-repository --yes ppa:ansible/ansible
-  sudo add-apt-repository --yes ppa:webupd8team/brackets
 elif [[ "$BASEDIST" = "debian" ]]; then
   DEBIAN_MAIN_REPO="http://ftp.jaist.ac.jp/debian/" # JAIST
   # local DEBIAN_MAIN_REPO="http://httpredir.debian.org/debian/" # Redir
@@ -178,10 +174,6 @@ PYTON_LATEST="$(pyenv install --list | tr --delete " " | grep --extended-regexp 
 pyenv install "$PYTON_LATEST"
 pyenv global "$PYTON_LATEST"
 set -eux
-
-if [[ "$BASEDIST" = "debian" ]]; then
-  pip install ansible
-fi
 
 #
 # git config
