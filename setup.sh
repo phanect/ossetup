@@ -138,7 +138,6 @@ nvm alias default 6
 set -eux
 
 npm update --global
-npm install --global bower eslint gulp
 
 # Python Environment Setup
 curl --silent --show-error --location https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
