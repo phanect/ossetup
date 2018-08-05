@@ -22,7 +22,6 @@
       "fcitx-mozc",
       "kde-config-fcitx",
 
-      "ansible",
       "docker-ce",
       "g++",
       "git",
@@ -35,15 +34,12 @@
     ],
     "ubuntu": {
       "all": [
-        "brackets",
         "firefox",
-        "flashplugin-installer",
         "muon"
       ]
     },
     "debian": {
       "all": [
-        "flashplugin-nonfree",
         "apper",
         "snapd"
       ]
