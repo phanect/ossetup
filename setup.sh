@@ -61,6 +61,8 @@ sudo apt-get --fix-broken install --yes
 sudo apt-get install --yes --no-install-recommends $PKGS_INSTALL
 
 # Snap
+sudo systemctl start snapd.service # If snapd is not running, start it
+
 sudo snap install circleci docker
 sudo snap install atom --classic
 
