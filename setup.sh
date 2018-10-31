@@ -76,15 +76,25 @@ dropbox autostart y
 #
 # Atom plugins
 #
-apm install atom-jinja2 \
-  atom-typescript \
+apm install \
+  atom-ide-ui \
   auto-indent \
+  autoclose-html \
   editorconfig \
   highlight-selected \
+  ide-css \
+  ide-html \
+  ide-json \
+  ide-typescript \
+  ide-vue \
+  ide-yaml \
   indent-toggle-on-paste \
   incremental-search \
+  language-babel \
   language-diff \
   language-docker \
+  language-ejs \
+  language-gitignore \
   language-htaccess \
   language-json5 \
   language-vue \
@@ -95,8 +105,31 @@ apm install atom-jinja2 \
   linter-jsonlint \
   linter-pep8 \
   linter-php \
-  linter-phpcs \
   linter-shellcheck
+
+# Disable unused build-in packages
+apm disable \
+  atom-dark-syntax \
+  atom-dark-ui \
+  atom-light-syntax \
+  atom-light-ui \
+  base16-tomorrow-dark-theme \
+  base16-tomorrow-light-theme \
+  one-dark-ui \
+  one-dark-syntax \
+  solarized-dark-syntax \
+  solarized-light-syntax \
+  \
+  styleguide \
+  \
+  language-c \
+  language-clojure \
+  language-coffee-script \
+  language-csharp \
+  language-java \
+  language-objective-c \
+  language-perl \
+  language-property-list
 
 # Vagrant plugins
 vagrant plugin install vagrant-vbguest
