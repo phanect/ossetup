@@ -53,6 +53,9 @@ elif [[ "$BASEDIST" = "debian" ]]; then
   sudo add-apt-repository "deb http://security.debian.org $CODENAME/updates main contrib non-free"
 fi
 
+# Add Node.js Repo
+curl --silent --location https://deb.nodesource.com/setup_6.x | sudo --preserve-env bash -
+
 # Add yarn Repo
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -150,26 +153,7 @@ fi
 # Vagrant plugins
 vagrant plugin install vagrant-vbguest
 
-#
-# Node.js Environment Setup
-#
-
-# Get latest version of NVM
-NVM_LATEST=$(curl --silent --show-error https://api.github.com/repos/creationix/nvm/releases/latest | jq --raw-output .name)
-
-touch ~/.bashrc
-curl --silent --show-error "https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh" | bash
-
-# - .bashrc may occur error
-# - nvm doesn't work on strict mode
-set +eux
-. ~/.nvm/nvm.sh # .bashrc doesn't run without GUI on Ubuntu; Load nvm.sh directly
-nvm install 6
-nvm use 6
-nvm alias default 6
-set -eux
-
-npm update --global
+sudo npm update --global
 
 # Python Environment Setup
 curl --silent --show-error --location https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
