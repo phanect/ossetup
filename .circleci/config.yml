@@ -5,16 +5,22 @@ jobs:
     working_directory: ~/ossetup
     environment:
       DEBIAN_FRONTEND: noninteractive
+      SNAPCRAFT_SETUP_CORE: 1
     docker:
       - image: kdeneon/all:user
         cmd: ["/bin/bash"]
         environment:
           DEBIAN_FRONTEND: noninteractive
+          SNAPCRAFT_SETUP_CORE: 1
     steps:
+      # - setup_remote_docker:
+      #    docker_layer_caching: true
       - run:
           command: |
+            sudo systemctl enable --now snapd
             sudo apt-get update -qq
-            sudo apt-get install --yes git
+            sudo apt-get install --yes git squashfs-tools squashfuse fuse
+            sudo snap install atom --classic
       - checkout
       - run:
           command: |
@@ -24,11 +30,14 @@ jobs:
     working_directory: ~/ossetup
     environment:
       DEBIAN_FRONTEND: noninteractive
+      SNAPCRAFT_SETUP_CORE: 1
     docker:
       - image: phanect/debian-kde
         environment:
           DEBIAN_FRONTEND: noninteractive
     steps:
+      - setup_remote_docker:
+         docker_layer_caching: true
       - run:
           command: |
             apt-get update -qq
@@ -45,4 +54,4 @@ workflows:
       - build-neon
       # Debian is now disabled since I don't use Debian for now.
       # Keep commented out for the time I will use Debian again
-      # - build-debian
+      - build-debian
