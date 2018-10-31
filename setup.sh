@@ -131,9 +131,6 @@ apm disable \
   language-perl \
   language-property-list
 
-# Vagrant plugins
-vagrant plugin install vagrant-vbguest
-
 # NPMs
 npm update --global
 
