@@ -22,7 +22,6 @@
       "fcitx-mozc",
       "kde-config-fcitx",
 
-      "docker-ce",
       "g++",
       "git",
       "kdesdk-dolphin-plugins",
