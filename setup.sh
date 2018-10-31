@@ -110,7 +110,7 @@ apm install atom-jinja2 \
   language-vue \
   linter \
   linter-eslint \
-  linter-htmlhint \
+  linter-htmllint \
   linter-js-yaml \
   linter-jsonlint \
   linter-pep8 \
