@@ -52,7 +52,7 @@ elif [[ "$BASEDIST" = "debian" ]]; then
 fi
 
 # Add Node.js Repo
-curl --silent --location https://deb.nodesource.com/setup_6.x | sudo --preserve-env bash -
+curl --silent --location https://deb.nodesource.com/setup_10.x | sudo --preserve-env bash -
 
 # Add yarn Repo
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
