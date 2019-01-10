@@ -30,7 +30,7 @@ rm --recursive --force /tmp/setup-phanective
 mkdir /tmp/setup-phanective
 cd /tmp/setup-phanective
 
-sudo apt-get remove --yes $PKGS_REMOVE
+sudo apt-get remove --yes --ignore-missing $PKGS_REMOVE
 
 sudo apt-get autoremove --yes
 sudo apt-get dist-upgrade --yes
@@ -85,7 +85,7 @@ set +eu
 set -eux
 
 sudo apt-get --fix-broken install --yes
-sudo apt-get install --yes --no-install-recommends $PKGS_INSTALL
+sudo apt-get install --yes --no-install-recommends --ignore-missing $PKGS_INSTALL
 
 # Snap
 if [[ "$BASEDIST" = "debian" ]]; then
