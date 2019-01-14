@@ -141,6 +141,8 @@ sudo npm update --global
 # git config
 #
 
+# Don't convert line endings to CRLF
+git config --global core.autocrlf false
 # Don't commit file permission change
 git config --global core.fileMode false
 # Allow `git push`
