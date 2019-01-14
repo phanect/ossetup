@@ -1,0 +1,4 @@
+.circleci/tmp/
+.vagrant/
+node_modules/
+*.log

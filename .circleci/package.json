@@ -1,0 +1,15 @@
+{
+  "name": "docker2sh.js",
+  "version": "0.0.1",
+  "description": "",
+  "main": "docker2sh.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jumpei Ogawa <phanective@gmail.com>",
+  "private": true,
+  "dependencies": {
+    "docker-file-parser": "^1.0.4",
+    "node-fetch": "^2.2.0"
+  }
+}

@@ -5,22 +5,27 @@ jobs:
     working_directory: ~/ossetup
     environment:
       DEBIAN_FRONTEND: noninteractive
-      SNAPCRAFT_SETUP_CORE: 1
-    docker:
-      - image: kdeneon/all:user
-        cmd: ["/bin/bash"]
-        environment:
-          DEBIAN_FRONTEND: noninteractive
-          SNAPCRAFT_SETUP_CORE: 1
+    machine:
+      enabled: true
+      environment:
+        DEBIAN_FRONTEND: noninteractive
     steps:
       # - setup_remote_docker:
       #    docker_layer_caching: true
       - run:
           command: |
-            sudo systemctl enable --now snapd
             sudo apt-get update -qq
-            sudo apt-get install --yes git squashfs-tools squashfuse fuse
-            sudo snap install atom --classic
+            sudo apt-get install --yes git
+
+            # TODO install vagrant
+
+            cd .circleci/
+            yarn
+            git clone --depth=1 https://github.com/KDE/docker-neon-all.git tmp/kdeneon
+            node docker2sh.js
+
+            cd tmp/kdeneon
+            vagrant up
       - checkout
       - run:
           command: |
