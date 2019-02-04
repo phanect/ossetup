@@ -44,10 +44,6 @@ echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources
 echo "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 
-# Add Docker Repo
-echo "deb [arch=amd64] https://download.docker.com/linux/$BASEDIST $CODENAME stable" | sudo tee /etc/apt/sources.list.d/docker.list
-curl -fsSL "https://download.docker.com/linux/$BASEDIST/gpg" | sudo apt-key add -
-
 sudo apt-get update -qq
 
 # Install from deb files
@@ -65,7 +61,10 @@ sudo apt-get --fix-broken install --yes
 sudo apt-get install --yes --no-install-recommends --ignore-missing $PKGS_INSTALL
 
 # Snap
+sudo snap install circleci docker
 sudo snap install atom --classic
+
+sudo snap connect circleci:docker docker
 
 if [[ "$BASEDIST" = "debian" ]]; then
   snap install firefox
