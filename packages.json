@@ -74,9 +74,6 @@
     "ubuntu": {
       "all": [
         "fonts-takao-pgothic"
-      ],
-      "werewolf": [
-        "kde-telepathy-legacy-presence-applet"
       ]
     },
     "debian": {
