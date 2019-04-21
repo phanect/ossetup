@@ -72,8 +72,8 @@ sudo apt-get update -qq
 
 # Install from deb files
 curl --silent --show-error --output /tmp/setup-phanective/atom.deb --location "https://atom.io/download/deb"
-curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$BASEDIST/dropbox_2015.10.28_amd64.deb"
-curl --silent --show-error --output /tmp/setup-phanective/vagrant.deb --location "https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb"
+curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$BASEDIST/dropbox_2019.02.14_amd64.deb"
+curl --silent --show-error --output /tmp/setup-phanective/vagrant.deb --location "https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb"
 
 # Ignore error that dependencies are not installed
 set +eu
