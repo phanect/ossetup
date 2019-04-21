@@ -17,7 +17,7 @@
       "yakuake",
 
       "dropbox",
-      "python-gpgme",
+      "python-gpg",
       "fcitx",
       "fcitx-mozc",
       "kde-config-fcitx",
