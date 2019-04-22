@@ -155,33 +155,6 @@ vagrant plugin install vagrant-vbguest
 
 sudo npm update --global
 
-# Python Environment Setup
-curl --silent --show-error --location https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-
-# Python build dependencies
-sudo apt-get install --yes libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev make
-
-if ! grep --fixed-strings --line-regexp "# PyEnv" ~/.bashrc; then
-cat << _EOF_ >> ~/.bashrc
-
-# PyEnv Setup
-export PATH="\$HOME/.pyenv/bin:\$PATH"
-eval "\$(pyenv init -)"
-eval "\$(pyenv virtualenv-init -)"
-_EOF_
-fi
-
-export PATH="$HOME/.pyenv/bin:$PATH"
-
-set +eu
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-PYTON_LATEST="$(pyenv install --list | tr --delete " " | grep --extended-regexp ^[0-9\.]+$ | tac | grep --max-count=1 .)"
-pyenv install "$PYTON_LATEST"
-pyenv global "$PYTON_LATEST"
-set -eux
-
 #
 # git config
 #
