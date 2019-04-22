@@ -169,20 +169,6 @@ git config --global push.default simple
 #
 sudo usermod --append --groups docker "$(whoami)"
 
-#
-# Aliases
-#
-if ! grep --fixed-strings --line-regexp "# colordiff" ~/.bashrc; then
-cat << _EOF_ >> ~/.bashrc
-
-# colordiff
-if [[ -x "$(which colordiff)" ]]; then
-alias diff="colordiff -u"
-export LESS='--RAW-CONTROL-CHARS'
-fi
-_EOF_
-fi
-
 if [[ ! -f ~/.ssh/id_rsa ]]; then
 ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -N ""
 fi

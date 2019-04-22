@@ -3,7 +3,6 @@
     "all": [
       "apt-transport-https",
       "curl",
-      "colordiff",
       "fonts-vlgothic",
       "jq",
       "kolourpaint4",
