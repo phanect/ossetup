@@ -6,7 +6,7 @@ jobs:
     environment:
       DEBIAN_FRONTEND: noninteractive
     docker:
-      - image: kdeneon/all:user
+      - image: kdeneon/plasma:user
         cmd: ["/bin/bash"]
         environment:
           DEBIAN_FRONTEND: noninteractive
