@@ -3,7 +3,6 @@
     "all": [
       "apt-transport-https",
       "curl",
-      "colordiff",
       "fonts-vlgothic",
       "jq",
       "kolourpaint4",
@@ -17,33 +16,29 @@
       "yakuake",
 
       "dropbox",
-      "python-gpgme",
+      "python-gpg",
       "fcitx",
       "fcitx-mozc",
       "kde-config-fcitx",
 
-      "ansible",
       "docker-ce",
       "g++",
       "git",
       "kdesdk-dolphin-plugins",
       "make",
+      "nodejs",
       "openjdk-8-jdk",
       "openssh-client",
-      "virtualbox-5.1",
+      "virtualbox-6.1",
       "yarn"
     ],
     "ubuntu": {
       "all": [
-        "brackets",
-        "firefox",
-        "flashplugin-installer",
-        "muon"
+        "firefox"
       ]
     },
     "debian": {
       "all": [
-        "flashplugin-nonfree",
         "apper",
         "snapd"
       ]
@@ -73,8 +68,6 @@
       "ktorrent",
       "fonts-droid",
       "fonts-horai-umefont",
-      "libreoffice",
-      "libreoffice-*",
       "openjdk-7-*",
       "partitionmanager",
       "xterm"

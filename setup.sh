@@ -40,10 +40,6 @@ if [[ "$BASEDIST" = "ubuntu" ]]; then
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME main restricted universe multiverse"
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-updates main restricted universe multiverse"
   sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-security main restricted universe multiverse"
-
-  # Add PPAs
-  sudo add-apt-repository --yes ppa:ansible/ansible
-  sudo add-apt-repository --yes ppa:webupd8team/brackets
 elif [[ "$BASEDIST" = "debian" ]]; then
   DEBIAN_MAIN_REPO="http://ftp.jaist.ac.jp/debian/" # JAIST
   # local DEBIAN_MAIN_REPO="http://httpredir.debian.org/debian/" # Redir
@@ -56,6 +52,9 @@ elif [[ "$BASEDIST" = "debian" ]]; then
   sudo add-apt-repository "deb $DEBIAN_MAIN_REPO $CODENAME-backports main contrib non-free" # for openjdk-8-*
   sudo add-apt-repository "deb http://security.debian.org $CODENAME/updates main contrib non-free"
 fi
+
+# Add Node.js Repo
+curl --sSL https://deb.nodesource.com/setup_12.x | sudo --preserve-env bash -
 
 # Add yarn Repo
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -73,8 +72,8 @@ sudo apt-get update -qq
 
 # Install from deb files
 curl --silent --show-error --output /tmp/setup-phanective/atom.deb --location "https://atom.io/download/deb"
-curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$BASEDIST/dropbox_2015.10.28_amd64.deb"
-curl --silent --show-error --output /tmp/setup-phanective/vagrant.deb --location "https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb"
+curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$BASEDIST/dropbox_2019.02.14_amd64.deb"
+curl --silent --show-error --output /tmp/setup-phanective/vagrant.deb --location "https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb"
 
 # Ignore error that dependencies are not installed
 set +eu
@@ -99,89 +98,62 @@ dropbox autostart y
 #
 # Atom plugins
 #
-apm install atom-jinja2 \
+apm install \
   atom-typescript \
   auto-indent \
+  autoclose-html \
   editorconfig \
   highlight-selected \
   indent-toggle-on-paste \
   incremental-search \
-  language-bats \
+  language-babel \
   language-diff \
   language-docker \
+  language-ejs \
+  language-gitignore \
   language-htaccess \
   language-json5 \
-  language-twig \
   language-vue \
   linter \
-  linter-csslint \
   linter-eslint \
-  linter-htmlhint \
+  linter-htmllint \
   linter-js-yaml \
   linter-jsonlint \
-  linter-pep8 \
   linter-php \
-  linter-phpcs \
-  linter-phpmd \
-  linter-rubocop \
-  linter-shellcheck \
-  linter-tidy
+  linter-shellcheck
+
+# Disable unused build-in packages
+# This doesn't work in most cases since apm disable requires ~/.atom/config.cson
+# which is generated on the first run of Atom.
+if [[ -f ~/.atom/config.cson ]]; then
+  apm disable \
+    atom-dark-syntax \
+    atom-dark-ui \
+    atom-light-syntax \
+    atom-light-ui \
+    base16-tomorrow-dark-theme \
+    base16-tomorrow-light-theme \
+    one-dark-ui \
+    one-dark-syntax \
+    solarized-dark-syntax \
+    solarized-light-syntax \
+    \
+    styleguide \
+    \
+    language-c \
+    language-clojure \
+    language-coffee-script \
+    language-csharp \
+    language-java \
+    language-objective-c \
+    language-perl \
+    language-property-list
+fi
 
 # Vagrant plugins
 vagrant plugin install vagrant-vbguest
 
-#
-# Node.js Environment Setup
-#
-
-# Get latest version of NVM
-NVM_LATEST=$(curl --silent --show-error https://api.github.com/repos/creationix/nvm/releases/latest | jq --raw-output .name)
-
-touch ~/.bashrc
-curl --silent --show-error "https://raw.githubusercontent.com/creationix/nvm/$NVM_LATEST/install.sh" | bash
-
-# - .bashrc may occur error
-# - nvm doesn't work on strict mode
-set +eux
-. ~/.nvm/nvm.sh # .bashrc doesn't run without GUI on Ubuntu; Load nvm.sh directly
-nvm install 6
-nvm use 6
-nvm alias default 6
-set -eux
-
-npm update --global
-npm install --global bower eslint gulp
-
-# Python Environment Setup
-curl --silent --show-error --location https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-
-# Python build dependencies
-sudo apt-get install --yes libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev make
-
-if ! grep --fixed-strings --line-regexp "# PyEnv" ~/.bashrc; then
-cat << _EOF_ >> ~/.bashrc
-
-# PyEnv Setup
-export PATH="\$HOME/.pyenv/bin:\$PATH"
-eval "\$(pyenv init -)"
-eval "\$(pyenv virtualenv-init -)"
-_EOF_
-fi
-
-export PATH="$HOME/.pyenv/bin:$PATH"
-
-set +eu
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-PYTON_LATEST="$(pyenv install --list | tr --delete " " | grep --extended-regexp ^[0-9\.]+$ | tac | grep --max-count=1 .)"
-pyenv install "$PYTON_LATEST"
-pyenv global "$PYTON_LATEST"
-set -eux
-
-if [[ "$BASEDIST" = "debian" ]]; then
-  pip install ansible
-fi
+sudo npm update --global
 
 #
 # git config
@@ -196,20 +168,6 @@ git config --global push.default simple
 # Allow non-root user to run Docker
 #
 sudo usermod --append --groups docker "$(whoami)"
-
-#
-# Aliases
-#
-if ! grep --fixed-strings --line-regexp "# colordiff" ~/.bashrc; then
-cat << _EOF_ >> ~/.bashrc
-
-# colordiff
-if [[ -x "$(which colordiff)" ]]; then
-alias diff="colordiff -u"
-export LESS='--RAW-CONTROL-CHARS'
-fi
-_EOF_
-fi
 
 if [[ ! -f ~/.ssh/id_rsa ]]; then
 ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -N ""
