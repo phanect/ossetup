@@ -35,24 +35,6 @@ sudo apt-get remove --yes $PKGS_REMOVE
 sudo apt-get autoremove --yes
 sudo apt-get dist-upgrade --yes
 
-if [[ "$BASEDIST" = "ubuntu" ]]; then
-  # Add universe and multiverse
-  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME main restricted universe multiverse"
-  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-updates main restricted universe multiverse"
-  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ $CODENAME-security main restricted universe multiverse"
-elif [[ "$BASEDIST" = "debian" ]]; then
-  DEBIAN_MAIN_REPO="http://ftp.jaist.ac.jp/debian/" # JAIST
-  # local DEBIAN_MAIN_REPO="http://httpredir.debian.org/debian/" # Redir
-
-  sudo rm --force /etc/apt/sources.list
-  sudo touch /etc/apt/sources.list
-
-  sudo add-apt-repository "deb $DEBIAN_MAIN_REPO $CODENAME main contrib non-free"
-  sudo add-apt-repository "deb $DEBIAN_MAIN_REPO $CODENAME-updates main contrib non-free"
-  sudo add-apt-repository "deb $DEBIAN_MAIN_REPO $CODENAME-backports main contrib non-free" # for openjdk-8-*
-  sudo add-apt-repository "deb http://security.debian.org $CODENAME/updates main contrib non-free"
-fi
-
 # Add Node.js Repo
 curl --sSL https://deb.nodesource.com/setup_12.x | sudo --preserve-env bash -
 
@@ -159,15 +141,12 @@ sudo npm update --global
 # git config
 #
 
+# Don't convert line endings to CRLF
+git config --global core.autocrlf false
 # Don't commit file permission change
 git config --global core.fileMode false
 # Allow `git push`
 git config --global push.default simple
-
-#
-# Allow non-root user to run Docker
-#
-sudo usermod --append --groups docker "$(whoami)"
 
 if [[ ! -f ~/.ssh/id_rsa ]]; then
 ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -N ""
