@@ -49,9 +49,28 @@ jobs:
           command: |
             ./setup.sh
 
+  build-debian-wsl:
+    working_directory: ~/ossetup
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    docker:
+      - image: debian:stretch
+        environment:
+          DEBIAN_FRONTEND: noninteractive
+    steps:
+      - run:
+          command: |
+            apt-get update -qq
+            apt-get install --yes git sudo
+      - checkout
+      - run:
+          command: |
+            ./setup.sh
+
 workflows:
   version: 2
   build_all:
     jobs:
       - build-neon
       - build-debian
+      - build-debian-wsl
