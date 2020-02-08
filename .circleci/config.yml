@@ -36,7 +36,7 @@ jobs:
     environment:
       DEBIAN_FRONTEND: noninteractive
     docker:
-      - image: phanect/debian-kde
+      - image: debian:buster
         environment:
           DEBIAN_FRONTEND: noninteractive
     steps:
@@ -54,6 +54,4 @@ workflows:
   build_all:
     jobs:
       - build-neon
-      # Debian is now disabled since I don't use Debian for now.
-      # Keep commented out for the time I will use Debian again
-      # - build-debian
+      - build-debian
