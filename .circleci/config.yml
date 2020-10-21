@@ -17,16 +17,6 @@ jobs:
             sudo apt-get install --yes git
       - checkout
       - run: sudo cp ./.circleci/snap.sh /usr/local/bin/snap
-      # This process is required to run apm. Atom will be installed via snap,
-      # but it can't be tested on CircleCI's Docker container.
-      # Instead, apm is installed as deb on CircleCI.
-      - run:
-          name: Install Atom deb package
-          command: |
-            sudo apt-get install --yes gconf2 gvfs-bin # Atom's dependencies
-            curl --silent --show-error --output /tmp/atom.deb --location "https://atom.io/download/deb"
-            sudo dpkg --install /tmp/atom.deb
-            sudo apt-get --fix-broken install --yes
       - run:
           command: |
             ./setup.sh
