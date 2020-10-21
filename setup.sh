@@ -16,19 +16,47 @@ if [[ "$BASEDIST" = "neon" ]]; then
   BASEDIST="ubuntu"
 fi
 
-PKGS_INSTALL="$(jq --raw-output '.install.all | arrays | join(" ")' < "$PATH_PACKAGES_JSON")"
-PKGS_INSTALL="$PKGS_INSTALL $(jq --raw-output ".install.$DISTRO.all | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
-PKGS_INSTALL="$PKGS_INSTALL $(jq --raw-output ".install.$DISTRO.$CODENAME | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
-PKGS_REMOVE="$(jq --raw-output '.remove.all | arrays | join(" ")' < "$PATH_PACKAGES_JSON")"
-PKGS_REMOVE="$PKGS_REMOVE $(jq --raw-output ".remove.$DISTRO.all | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
-PKGS_REMOVE="$PKGS_REMOVE $(jq --raw-output ".remove.$DISTRO.$CODENAME | arrays | join(\" \")" < "$PATH_PACKAGES_JSON")"
-
 rm --recursive --force /tmp/setup-phanective
 
 mkdir /tmp/setup-phanective
 cd /tmp/setup-phanective
 
-sudo apt-get remove --yes --ignore-missing $PKGS_REMOVE
+sudo apt-get remove --yes --ignore-missing \
+  akregator \
+  amarok \
+  dragonplayer \
+  fonts-droid \
+  fonts-horai-umefont \
+  fonts-takao-pgothic \
+  jovie \
+  juk \
+  kaddressbook \
+  kde-telepathy-contact-list \
+  kde-telepathy-text-ui \
+  kmag \
+  kmail \
+  kmousetool \
+  kmouth \
+  knotes \
+  kontact \
+  konversation \
+  kopete \
+  korganizer \
+  kwrite \
+  krdc \
+  ktorrent \
+  openjdk-7-* \
+  partitionmanager \
+  xterm
+
+if [[ "${DISTRO}" == "debian" ]]; then
+  sudo apt-get remove --yes --ignore-missing \
+    kde-full \
+    kde-standard \
+    kdeplasma-addons \
+    plasma-scriptengine-superkaramba \
+    plasma-widget-lancelot
+fi
 
 sudo apt-get autoremove --yes
 sudo apt-get dist-upgrade --yes
@@ -58,7 +86,41 @@ set +eu
 set -eux
 
 sudo apt-get --fix-broken install --yes
-sudo apt-get install --yes --no-install-recommends --ignore-missing $PKGS_INSTALL
+sudo apt-get install --yes --no-install-recommends --ignore-missing \
+  apt-transport-https \
+  curl \
+  dropbox \
+  python-gpg \
+  g++ \
+  git \
+  fcitx \
+  fcitx-mozc \
+  firefox \
+  fonts-vlgothic \
+  kde-config-fcitx \
+  kdesdk-dolphin-plugins \
+  jq \
+  kolourpaint4 \
+  make \
+  nodejs \
+  ntp \
+  ntpdate \
+  openjdk-8-jdk \
+  openssh-client \
+  plasma-widget-folderview \
+  sudo \
+  virtualbox-6.1 \
+  vlc \
+  wget \
+  whois \
+  yakuake \
+  yarn
+
+if [[ "${DISTRO}" == "debian" ]]; then
+  sudo apt-get install --yes --no-install-recommends --ignore-missing \
+    apper \
+    snapd
+fi
 
 # Snap
 sudo snap install circleci docker
