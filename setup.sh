@@ -139,6 +139,9 @@ git config --global core.autocrlf false
 # Don't commit file permission change
 git config --global core.fileMode false
 
+git config --global user.name "Jumpei Ogawa"
+# git config --global user.email "phanect@example.com" # Do it manually
+
 if [[ ! -f ~/.ssh/id_rsa ]]; then
 ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -N ""
 fi
