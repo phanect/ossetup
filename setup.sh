@@ -3,7 +3,7 @@
 set -eux
 
 sudo apt-get update -qq
-sudo apt-get install --yes apt-transport-https curl jq lsb-release software-properties-common sudo wget
+sudo apt-get install --yes apt-transport-https curl lsb-release software-properties-common sudo wget
 
 PATH_PACKAGES_JSON="$(dirname "$BASH_SOURCE")/packages.json"
 
@@ -38,6 +38,7 @@ sudo apt-get remove --yes --ignore-missing \
   kmousetool \
   kmouth \
   knotes \
+  kolourpaint4 \
   kontact \
   konversation \
   kopete \
@@ -88,39 +89,27 @@ set -eux
 sudo apt-get --fix-broken install --yes
 sudo apt-get install --yes --no-install-recommends --ignore-missing \
   apt-transport-https \
+  build-essential \
+  clamav \
   curl \
-  dropbox \
-  python-gpg \
-  g++ \
   git \
   fcitx \
   fcitx-mozc \
   firefox \
   fonts-vlgothic \
   kde-config-fcitx \
-  kdesdk-dolphin-plugins \
-  jq \
-  kolourpaint4 \
-  make \
+  kolourpaint \
   nodejs \
-  ntp \
-  ntpdate \
-  openjdk-8-jdk \
   openssh-client \
-  plasma-widget-folderview \
+  snapd \
   sudo \
+  uvccapture guvcview \
   virtualbox-6.1 \
   vlc \
   wget \
   whois \
   yakuake \
   yarn
-
-if [[ "${DISTRO}" == "debian" ]]; then
-  sudo apt-get install --yes --no-install-recommends --ignore-missing \
-    apper \
-    snapd
-fi
 
 # Snap
 sudo snap install circleci docker
