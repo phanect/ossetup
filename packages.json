@@ -3,6 +3,7 @@
     "all": [
       "apt-transport-https",
       "curl",
+      "firefox",
       "fonts-vlgothic",
       "jq",
       "kolourpaint4",
@@ -31,11 +32,6 @@
       "virtualbox-6.1",
       "yarn"
     ],
-    "ubuntu": {
-      "all": [
-        "firefox"
-      ]
-    },
     "debian": {
       "all": [
         "apper",
@@ -67,18 +63,11 @@
       "ktorrent",
       "fonts-droid",
       "fonts-horai-umefont",
+      "fonts-takao-pgothic",
       "openjdk-7-*",
       "partitionmanager",
       "xterm"
     ],
-    "ubuntu": {
-      "all": [
-        "fonts-takao-pgothic"
-      ],
-      "werewolf": [
-        "kde-telepathy-legacy-presence-applet"
-      ]
-    },
     "debian": {
       "all": [
         "kde-full",
