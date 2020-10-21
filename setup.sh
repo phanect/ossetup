@@ -78,12 +78,14 @@ sudo apt-get update -qq
 # Install from deb files
 curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$BASEDIST/dropbox_2019.02.14_amd64.deb"
 curl --silent --show-error --output /tmp/setup-phanective/vagrant.deb --location "https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb"
+curl --silent --show-error --output /tmp/setup-phanective/vscode.deb  --location "https://go.microsoft.com/fwlink/?LinkID=760868"
 
 # Ignore error that dependencies are not installed
 set +eu
   sudo dpkg --install \
     /tmp/setup-phanective/dropbox.deb \
-    /tmp/setup-phanective/vagrant.deb
+    /tmp/setup-phanective/vagrant.deb \
+    /tmp/setup-phanective/vscode.deb
 set -eux
 
 sudo apt-get --fix-broken install --yes
@@ -113,8 +115,6 @@ sudo apt-get install --yes --no-install-recommends --ignore-missing \
 
 # Snap
 sudo snap install circleci docker
-sudo snap install atom --classic
-
 sudo snap connect circleci:docker docker
 
 if [[ "$BASEDIST" = "debian" ]]; then
@@ -124,61 +124,6 @@ fi
 # Dropbox proprietary daemon installation
 (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -)
 dropbox autostart y
-
-#
-# Atom plugins
-#
-apm install \
-  atom-typescript \
-  auto-indent \
-  autoclose-html \
-  editorconfig \
-  highlight-selected \
-  indent-toggle-on-paste \
-  incremental-search \
-  language-babel \
-  language-diff \
-  language-docker \
-  language-ejs \
-  language-gitignore \
-  language-htaccess \
-  language-json5 \
-  language-vue \
-  linter \
-  linter-eslint \
-  linter-htmllint \
-  linter-js-yaml \
-  linter-jsonlint \
-  linter-php \
-  linter-shellcheck
-
-# Disable unused build-in packages
-# This doesn't work in most cases since apm disable requires ~/.atom/config.cson
-# which is generated on the first run of Atom.
-if [[ -f ~/.atom/config.cson ]]; then
-  apm disable \
-    atom-dark-syntax \
-    atom-dark-ui \
-    atom-light-syntax \
-    atom-light-ui \
-    base16-tomorrow-dark-theme \
-    base16-tomorrow-light-theme \
-    one-dark-ui \
-    one-dark-syntax \
-    solarized-dark-syntax \
-    solarized-light-syntax \
-    \
-    styleguide \
-    \
-    language-c \
-    language-clojure \
-    language-coffee-script \
-    language-csharp \
-    language-java \
-    language-objective-c \
-    language-perl \
-    language-property-list
-fi
 
 # Vagrant plugins
 vagrant plugin install vagrant-vbguest
