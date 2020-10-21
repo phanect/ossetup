@@ -125,6 +125,9 @@ fi
 (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -)
 dropbox autostart y
 
+# Allow Dropbox to watch more number of files
+echo "fs.inotify.max_user_watches = 100000" | sudo tee /etc/sysctl.d/dropbox.conf
+
 # Vagrant plugins
 vagrant plugin install vagrant-vbguest
 
