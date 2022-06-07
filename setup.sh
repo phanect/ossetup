@@ -5,8 +5,6 @@ set -eux
 sudo apt-get update -qq
 sudo apt-get install --yes apt-transport-https curl lsb-release software-properties-common sudo wget
 
-PATH_PACKAGES_JSON="$(dirname "$BASH_SOURCE")/packages.json"
-
 DISTRO="$(lsb_release --short --id)"
 DISTRO="${DISTRO,,}" # Make lowercase: e.g. Debian -> debian, Ubuntu -> ubuntu
 CODENAME="$(lsb_release --short --codename)"
@@ -63,28 +61,28 @@ sudo apt-get autoremove --yes
 sudo apt-get dist-upgrade --yes
 
 # Add Node.js Repo
-curl -sSL https://deb.nodesource.com/setup_14.x | sudo --preserve-env bash -
-
-# Add yarn Repo
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 
 # Add VirtualBox Repo
 echo "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 
+# Add Hashicorp Repo
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
 sudo apt-get update -qq
 
 # Install from deb files
+curl --silent --show-error --output /tmp/setup-phanective/docker-desktop.deb  --location "https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.0-amd64.deb"
 curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$BASEDIST/dropbox_2019.02.14_amd64.deb"
-curl --silent --show-error --output /tmp/setup-phanective/vagrant.deb --location "https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb"
 curl --silent --show-error --output /tmp/setup-phanective/vscode.deb  --location "https://go.microsoft.com/fwlink/?LinkID=760868"
 
 # Ignore error that dependencies are not installed
 set +eu
   sudo dpkg --install \
+    /tmp/setup-phanective/docker-desktop.deb \
     /tmp/setup-phanective/dropbox.deb \
-    /tmp/setup-phanective/vagrant.deb \
     /tmp/setup-phanective/vscode.deb
 set -eux
 
@@ -106,16 +104,12 @@ sudo apt-get install --yes --no-install-recommends --ignore-missing \
   snapd \
   sudo \
   uvccapture guvcview \
+  vagrant \
   virtualbox-6.1 \
   vlc \
   wget \
   whois \
-  yakuake \
-  yarn
-
-# Snap
-sudo snap install circleci docker
-sudo snap connect circleci:docker docker
+  yakuake
 
 if [[ "$BASEDIST" = "debian" ]]; then
   snap install firefox
@@ -146,7 +140,7 @@ git config --global user.name "Jumpei Ogawa"
 # git config --global user.email "phanect@example.com" # Do it manually
 
 if [[ ! -f ~/.ssh/id_rsa ]]; then
-ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -N ""
+  ssh-keygen -t ed25519 -f ~/.ssh/id_rsa -N ""
 fi
 
 rm --recursive --force /tmp/setup-phanective
