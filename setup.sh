@@ -146,7 +146,7 @@ git config --global user.name "Jumpei Ogawa"
 # git config --global user.email "phanect@example.com" # Do it manually
 
 if [[ ! -f ~/.ssh/id_rsa ]]; then
-ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -N ""
+  ssh-keygen -t ed25519 -f ~/.ssh/id_rsa -N ""
 fi
 
 rm --recursive --force /tmp/setup-phanective
