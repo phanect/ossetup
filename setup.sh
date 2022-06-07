@@ -5,8 +5,6 @@ set -eux
 sudo apt-get update -qq
 sudo apt-get install --yes apt-transport-https curl lsb-release software-properties-common sudo wget
 
-PATH_PACKAGES_JSON="$(dirname "$BASH_SOURCE")/packages.json"
-
 DISTRO="$(lsb_release --short --id)"
 DISTRO="${DISTRO,,}" # Make lowercase: e.g. Debian -> debian, Ubuntu -> ubuntu
 CODENAME="$(lsb_release --short --codename)"
