@@ -73,18 +73,20 @@ echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources
 echo "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 
+# Add Hashicorp Repo
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
 sudo apt-get update -qq
 
 # Install from deb files
 curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$BASEDIST/dropbox_2019.02.14_amd64.deb"
-curl --silent --show-error --output /tmp/setup-phanective/vagrant.deb --location "https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb"
 curl --silent --show-error --output /tmp/setup-phanective/vscode.deb  --location "https://go.microsoft.com/fwlink/?LinkID=760868"
 
 # Ignore error that dependencies are not installed
 set +eu
   sudo dpkg --install \
     /tmp/setup-phanective/dropbox.deb \
-    /tmp/setup-phanective/vagrant.deb \
     /tmp/setup-phanective/vscode.deb
 set -eux
 
@@ -106,6 +108,7 @@ sudo apt-get install --yes --no-install-recommends --ignore-missing \
   snapd \
   sudo \
   uvccapture guvcview \
+  vagrant \
   virtualbox-6.1 \
   vlc \
   wget \
