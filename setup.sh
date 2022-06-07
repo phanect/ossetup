@@ -63,7 +63,7 @@ sudo apt-get autoremove --yes
 sudo apt-get dist-upgrade --yes
 
 # Add Node.js Repo
-curl -sSL https://deb.nodesource.com/setup_14.x | sudo --preserve-env bash -
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 
 # Add yarn Repo
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
