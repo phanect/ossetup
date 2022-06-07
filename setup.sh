@@ -80,12 +80,14 @@ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(l
 sudo apt-get update -qq
 
 # Install from deb files
+curl --silent --show-error --output /tmp/setup-phanective/docker-desktop.deb  --location "https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.0-amd64.deb"
 curl --silent --show-error --output /tmp/setup-phanective/dropbox.deb --location "https://www.dropbox.com/download?dl=packages/$BASEDIST/dropbox_2019.02.14_amd64.deb"
 curl --silent --show-error --output /tmp/setup-phanective/vscode.deb  --location "https://go.microsoft.com/fwlink/?LinkID=760868"
 
 # Ignore error that dependencies are not installed
 set +eu
   sudo dpkg --install \
+    /tmp/setup-phanective/docker-desktop.deb \
     /tmp/setup-phanective/dropbox.deb \
     /tmp/setup-phanective/vscode.deb
 set -eux
@@ -115,10 +117,6 @@ sudo apt-get install --yes --no-install-recommends --ignore-missing \
   whois \
   yakuake \
   yarn
-
-# Snap
-sudo snap install circleci docker
-sudo snap connect circleci:docker docker
 
 if [[ "$BASEDIST" = "debian" ]]; then
   snap install firefox
