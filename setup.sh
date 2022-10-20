@@ -132,9 +132,11 @@ sudo npm update --global
 #
 
 # Don't convert line endings to CRLF
-git config --global core.autocrlf false
+sudo git config --system core.autocrlf false
 # Don't commit file permission change
-git config --global core.fileMode false
+sudo git config --system core.fileMode false
+# Set default branch name
+sudo git config --system init.defaultBranch main
 
 git config --global user.name "Jumpei Ogawa"
 # git config --global user.email "phanect@example.com" # Do it manually
