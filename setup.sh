@@ -65,10 +65,10 @@ curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 
 # Add VirtualBox Repo
 echo "deb http://download.virtualbox.org/virtualbox/debian $CODENAME contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+wget -qO- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo tee /etc/apt/trusted.gpg.d/virtualbox.asc
 
 # Add Hashicorp Repo
-curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo tee /etc/apt/trusted.gpg.d/hashicorp.asc
 sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 
 sudo apt-get update -qq
